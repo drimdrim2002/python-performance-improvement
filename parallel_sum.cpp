@@ -2168,13 +2168,7 @@ static CYTHON_INLINE void __Pyx_SafeReleaseBuffer(Py_buffer* info);
 static Py_ssize_t __Pyx_minusones[] = { -1, -1, -1, -1, -1, -1, -1, -1 };
 static Py_ssize_t __Pyx_zeros[] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
-/* BufferIndexError.proto */
-static void __Pyx_RaiseBufferIndexError(int axis);
-
 #define __Pyx_BufPtrStrided1d(type, buf, i0, s0) (type)((char*)buf + i0 * s0)
-/* BufferIndexErrorNogil.proto */
-static void __Pyx_RaiseBufferIndexErrorNogil(int axis);
-
 /* PyDictVersioning.proto */
 #if CYTHON_USE_DICT_VERSIONS && CYTHON_USE_TYPE_SLOTS
 #define __PYX_DICT_VERSION_INIT  ((PY_UINT64_T) -1)
@@ -4402,7 +4396,7 @@ static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObjec
   return __pyx_r;
 }
 
-/* "parallel_sum.pyx":17
+/* "parallel_sum.pyx":18
  *     double omp_get_wtime()
  * 
  * def get_num_threads():             # <<<<<<<<<<<<<<
@@ -4440,19 +4434,19 @@ static PyObject *__pyx_pf_12parallel_sum_get_num_threads(CYTHON_UNUSED PyObject 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_num_threads", 1);
 
-  /* "parallel_sum.pyx":23
+  /* "parallel_sum.pyx":24
  *     #
  *     #    CPU    OpenMP
  *     import multiprocessing             # <<<<<<<<<<<<<<
  *     return multiprocessing.cpu_count()
  * 
  */
-  __pyx_t_1 = __Pyx_ImportDottedModule(__pyx_n_s_multiprocessing, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 23, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_ImportDottedModule(__pyx_n_s_multiprocessing, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_multiprocessing = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "parallel_sum.pyx":24
+  /* "parallel_sum.pyx":25
  *     #    CPU    OpenMP
  *     import multiprocessing
  *     return multiprocessing.cpu_count()             # <<<<<<<<<<<<<<
@@ -4460,7 +4454,7 @@ static PyObject *__pyx_pf_12parallel_sum_get_num_threads(CYTHON_UNUSED PyObject 
  * def set_num_threads(int num):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_multiprocessing, __pyx_n_s_cpu_count); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 24, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_multiprocessing, __pyx_n_s_cpu_count); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -4480,7 +4474,7 @@ static PyObject *__pyx_pf_12parallel_sum_get_num_threads(CYTHON_UNUSED PyObject 
     PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 24, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
@@ -4488,7 +4482,7 @@ static PyObject *__pyx_pf_12parallel_sum_get_num_threads(CYTHON_UNUSED PyObject 
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "parallel_sum.pyx":17
+  /* "parallel_sum.pyx":18
  *     double omp_get_wtime()
  * 
  * def get_num_threads():             # <<<<<<<<<<<<<<
@@ -4510,7 +4504,7 @@ static PyObject *__pyx_pf_12parallel_sum_get_num_threads(CYTHON_UNUSED PyObject 
   return __pyx_r;
 }
 
-/* "parallel_sum.pyx":26
+/* "parallel_sum.pyx":27
  *     return multiprocessing.cpu_count()
  * 
  * def set_num_threads(int num):             # <<<<<<<<<<<<<<
@@ -4572,23 +4566,23 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 26, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 27, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "set_num_threads") < 0)) __PYX_ERR(0, 26, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "set_num_threads") < 0)) __PYX_ERR(0, 27, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
     }
-    __pyx_v_num = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_num == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 26, __pyx_L3_error)
+    __pyx_v_num = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_num == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 27, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("set_num_threads", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 26, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("set_num_threads", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 27, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4620,7 +4614,7 @@ static PyObject *__pyx_pf_12parallel_sum_2set_num_threads(CYTHON_UNUSED PyObject
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("set_num_threads", 1);
 
-  /* "parallel_sum.pyx":30
+  /* "parallel_sum.pyx":31
  *     OpenMP   .
  *     """
  *     omp_set_num_threads(num)             # <<<<<<<<<<<<<<
@@ -4629,7 +4623,7 @@ static PyObject *__pyx_pf_12parallel_sum_2set_num_threads(CYTHON_UNUSED PyObject
  */
   omp_set_num_threads(__pyx_v_num);
 
-  /* "parallel_sum.pyx":26
+  /* "parallel_sum.pyx":27
  *     return multiprocessing.cpu_count()
  * 
  * def set_num_threads(int num):             # <<<<<<<<<<<<<<
@@ -4644,7 +4638,7 @@ static PyObject *__pyx_pf_12parallel_sum_2set_num_threads(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "parallel_sum.pyx":32
+/* "parallel_sum.pyx":33
  *     omp_set_num_threads(num)
  * 
  * def sum_serial(np.ndarray[double, ndim=1] arr):             # <<<<<<<<<<<<<<
@@ -4706,12 +4700,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 32, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 33, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "sum_serial") < 0)) __PYX_ERR(0, 32, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "sum_serial") < 0)) __PYX_ERR(0, 33, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -4722,7 +4716,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("sum_serial", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 32, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("sum_serial", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 33, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4736,7 +4730,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_arr), __pyx_ptype_5numpy_ndarray, 1, "arr", 0))) __PYX_ERR(0, 32, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_arr), __pyx_ptype_5numpy_ndarray, 1, "arr", 0))) __PYX_ERR(0, 33, __pyx_L1_error)
   __pyx_r = __pyx_pf_12parallel_sum_4sum_serial(__pyx_self, __pyx_v_arr);
 
   /* function exit code */
@@ -4767,8 +4761,7 @@ static PyObject *__pyx_pf_12parallel_sum_4sum_serial(CYTHON_UNUSED PyObject *__p
   int __pyx_t_3;
   int __pyx_t_4;
   Py_ssize_t __pyx_t_5;
-  int __pyx_t_6;
-  PyObject *__pyx_t_7 = NULL;
+  PyObject *__pyx_t_6 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -4779,11 +4772,11 @@ static PyObject *__pyx_pf_12parallel_sum_4sum_serial(CYTHON_UNUSED PyObject *__p
   __pyx_pybuffernd_arr.rcbuffer = &__pyx_pybuffer_arr;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_arr.rcbuffer->pybuffer, (PyObject*)__pyx_v_arr, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 32, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_arr.rcbuffer->pybuffer, (PyObject*)__pyx_v_arr, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 33, __pyx_L1_error)
   }
   __pyx_pybuffernd_arr.diminfo[0].strides = __pyx_pybuffernd_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_arr.diminfo[0].shape = __pyx_pybuffernd_arr.rcbuffer->pybuffer.shape[0];
 
-  /* "parallel_sum.pyx":38
+  /* "parallel_sum.pyx":39
  *     cdef:
  *         int i
  *         double total = 0.0             # <<<<<<<<<<<<<<
@@ -4792,17 +4785,17 @@ static PyObject *__pyx_pf_12parallel_sum_4sum_serial(CYTHON_UNUSED PyObject *__p
  */
   __pyx_v_total = 0.0;
 
-  /* "parallel_sum.pyx":39
+  /* "parallel_sum.pyx":40
  *         int i
  *         double total = 0.0
  *         int n = arr.shape[0]             # <<<<<<<<<<<<<<
  * 
  *     for i in range(n):
  */
-  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_arr)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_arr)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 40, __pyx_L1_error)
   __pyx_v_n = (__pyx_t_1[0]);
 
-  /* "parallel_sum.pyx":41
+  /* "parallel_sum.pyx":42
  *         int n = arr.shape[0]
  * 
  *     for i in range(n):             # <<<<<<<<<<<<<<
@@ -4814,7 +4807,7 @@ static PyObject *__pyx_pf_12parallel_sum_4sum_serial(CYTHON_UNUSED PyObject *__p
   for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_3; __pyx_t_4+=1) {
     __pyx_v_i = __pyx_t_4;
 
-    /* "parallel_sum.pyx":42
+    /* "parallel_sum.pyx":43
  * 
  *     for i in range(n):
  *         total += arr[i]             # <<<<<<<<<<<<<<
@@ -4822,19 +4815,10 @@ static PyObject *__pyx_pf_12parallel_sum_4sum_serial(CYTHON_UNUSED PyObject *__p
  *     return total
  */
     __pyx_t_5 = __pyx_v_i;
-    __pyx_t_6 = -1;
-    if (__pyx_t_5 < 0) {
-      __pyx_t_5 += __pyx_pybuffernd_arr.diminfo[0].shape;
-      if (unlikely(__pyx_t_5 < 0)) __pyx_t_6 = 0;
-    } else if (unlikely(__pyx_t_5 >= __pyx_pybuffernd_arr.diminfo[0].shape)) __pyx_t_6 = 0;
-    if (unlikely(__pyx_t_6 != -1)) {
-      __Pyx_RaiseBufferIndexError(__pyx_t_6);
-      __PYX_ERR(0, 42, __pyx_L1_error)
-    }
     __pyx_v_total = (__pyx_v_total + (*__Pyx_BufPtrStrided1d(double *, __pyx_pybuffernd_arr.rcbuffer->pybuffer.buf, __pyx_t_5, __pyx_pybuffernd_arr.diminfo[0].strides)));
   }
 
-  /* "parallel_sum.pyx":44
+  /* "parallel_sum.pyx":45
  *         total += arr[i]
  * 
  *     return total             # <<<<<<<<<<<<<<
@@ -4842,13 +4826,13 @@ static PyObject *__pyx_pf_12parallel_sum_4sum_serial(CYTHON_UNUSED PyObject *__p
  * def sum_parallel(np.ndarray[double, ndim=1] arr, int num_threads=0):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_total); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 44, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
-  __pyx_r = __pyx_t_7;
-  __pyx_t_7 = 0;
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_total); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_r = __pyx_t_6;
+  __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "parallel_sum.pyx":32
+  /* "parallel_sum.pyx":33
  *     omp_set_num_threads(num)
  * 
  * def sum_serial(np.ndarray[double, ndim=1] arr):             # <<<<<<<<<<<<<<
@@ -4858,7 +4842,7 @@ static PyObject *__pyx_pf_12parallel_sum_4sum_serial(CYTHON_UNUSED PyObject *__p
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_6);
   { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
     __Pyx_PyThreadState_declare
     __Pyx_PyThreadState_assign
@@ -4876,7 +4860,7 @@ static PyObject *__pyx_pf_12parallel_sum_4sum_serial(CYTHON_UNUSED PyObject *__p
   return __pyx_r;
 }
 
-/* "parallel_sum.pyx":46
+/* "parallel_sum.pyx":47
  *     return total
  * 
  * def sum_parallel(np.ndarray[double, ndim=1] arr, int num_threads=0):             # <<<<<<<<<<<<<<
@@ -4941,19 +4925,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 46, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 47, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_num_threads);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 46, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 47, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "sum_parallel") < 0)) __PYX_ERR(0, 46, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "sum_parallel") < 0)) __PYX_ERR(0, 47, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -4966,14 +4950,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     }
     __pyx_v_arr = ((PyArrayObject *)values[0]);
     if (values[1]) {
-      __pyx_v_num_threads = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 46, __pyx_L3_error)
+      __pyx_v_num_threads = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 47, __pyx_L3_error)
     } else {
       __pyx_v_num_threads = ((int)((int)0));
     }
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("sum_parallel", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 46, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("sum_parallel", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 47, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4987,7 +4971,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_arr), __pyx_ptype_5numpy_ndarray, 1, "arr", 0))) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_arr), __pyx_ptype_5numpy_ndarray, 1, "arr", 0))) __PYX_ERR(0, 47, __pyx_L1_error)
   __pyx_r = __pyx_pf_12parallel_sum_6sum_parallel(__pyx_self, __pyx_v_arr, __pyx_v_num_threads);
 
   /* function exit code */
@@ -5019,8 +5003,7 @@ static PyObject *__pyx_pf_12parallel_sum_6sum_parallel(CYTHON_UNUSED PyObject *_
   int __pyx_t_4;
   int __pyx_t_5;
   Py_ssize_t __pyx_t_6;
-  int __pyx_t_7;
-  PyObject *__pyx_t_8 = NULL;
+  PyObject *__pyx_t_7 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -5031,11 +5014,11 @@ static PyObject *__pyx_pf_12parallel_sum_6sum_parallel(CYTHON_UNUSED PyObject *_
   __pyx_pybuffernd_arr.rcbuffer = &__pyx_pybuffer_arr;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_arr.rcbuffer->pybuffer, (PyObject*)__pyx_v_arr, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 46, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_arr.rcbuffer->pybuffer, (PyObject*)__pyx_v_arr, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 47, __pyx_L1_error)
   }
   __pyx_pybuffernd_arr.diminfo[0].strides = __pyx_pybuffernd_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_arr.diminfo[0].shape = __pyx_pybuffernd_arr.rcbuffer->pybuffer.shape[0];
 
-  /* "parallel_sum.pyx":59
+  /* "parallel_sum.pyx":60
  *     cdef:
  *         int i
  *         double total = 0.0             # <<<<<<<<<<<<<<
@@ -5044,17 +5027,17 @@ static PyObject *__pyx_pf_12parallel_sum_6sum_parallel(CYTHON_UNUSED PyObject *_
  */
   __pyx_v_total = 0.0;
 
-  /* "parallel_sum.pyx":60
+  /* "parallel_sum.pyx":61
  *         int i
  *         double total = 0.0
  *         int n = arr.shape[0]             # <<<<<<<<<<<<<<
  * 
  *     if num_threads > 0:
  */
-  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_arr)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_arr)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 61, __pyx_L1_error)
   __pyx_v_n = (__pyx_t_1[0]);
 
-  /* "parallel_sum.pyx":62
+  /* "parallel_sum.pyx":63
  *         int n = arr.shape[0]
  * 
  *     if num_threads > 0:             # <<<<<<<<<<<<<<
@@ -5064,7 +5047,7 @@ static PyObject *__pyx_pf_12parallel_sum_6sum_parallel(CYTHON_UNUSED PyObject *_
   __pyx_t_2 = (__pyx_v_num_threads > 0);
   if (__pyx_t_2) {
 
-    /* "parallel_sum.pyx":63
+    /* "parallel_sum.pyx":64
  * 
  *     if num_threads > 0:
  *         omp_set_num_threads(num_threads)             # <<<<<<<<<<<<<<
@@ -5073,7 +5056,7 @@ static PyObject *__pyx_pf_12parallel_sum_6sum_parallel(CYTHON_UNUSED PyObject *_
  */
     omp_set_num_threads(__pyx_v_num_threads);
 
-    /* "parallel_sum.pyx":62
+    /* "parallel_sum.pyx":63
  *         int n = arr.shape[0]
  * 
  *     if num_threads > 0:             # <<<<<<<<<<<<<<
@@ -5082,7 +5065,7 @@ static PyObject *__pyx_pf_12parallel_sum_6sum_parallel(CYTHON_UNUSED PyObject *_
  */
   }
 
-  /* "parallel_sum.pyx":67
+  /* "parallel_sum.pyx":68
  *     # OpenMP parallel for
  *     #
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -5098,7 +5081,7 @@ static PyObject *__pyx_pf_12parallel_sum_6sum_parallel(CYTHON_UNUSED PyObject *_
       #endif
       /*try:*/ {
 
-        /* "parallel_sum.pyx":69
+        /* "parallel_sum.pyx":70
  *     with nogil:
  *         # reduction
  *         for i in prange(n, schedule='static'):             # <<<<<<<<<<<<<<
@@ -5107,12 +5090,6 @@ static PyObject *__pyx_pf_12parallel_sum_6sum_parallel(CYTHON_UNUSED PyObject *_
  */
         __pyx_t_3 = __pyx_v_n;
         {
-            int __pyx_parallel_temp0 = ((int)0xbad0bad0);
-            double __pyx_parallel_temp1 = ((double)__PYX_NAN());
-            const char *__pyx_parallel_filename = NULL; int __pyx_parallel_lineno = 0, __pyx_parallel_clineno = 0;
-            PyObject *__pyx_parallel_exc_type = NULL, *__pyx_parallel_exc_value = NULL, *__pyx_parallel_exc_tb = NULL;
-            int __pyx_parallel_why;
-            __pyx_parallel_why = 0;
             #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
                 #undef likely
                 #undef unlikely
@@ -5123,24 +5100,17 @@ static PyObject *__pyx_pf_12parallel_sum_6sum_parallel(CYTHON_UNUSED PyObject *_
             if (__pyx_t_5 > 0)
             {
                 #ifdef _OPENMP
-                #pragma omp parallel reduction(+:__pyx_v_total) private(__pyx_t_6, __pyx_t_7) private(__pyx_filename, __pyx_lineno, __pyx_clineno) shared(__pyx_parallel_why, __pyx_parallel_exc_type, __pyx_parallel_exc_value, __pyx_parallel_exc_tb)
+                #pragma omp parallel reduction(+:__pyx_v_total) private(__pyx_t_6)
                 #endif /* _OPENMP */
                 {
-                    #ifdef _OPENMP
-                    #ifdef WITH_THREAD
-                    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-                    #endif
-                    Py_BEGIN_ALLOW_THREADS
-                    #endif /* _OPENMP */
                     #ifdef _OPENMP
                     #pragma omp for firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) schedule(static)
                     #endif /* _OPENMP */
                     for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_5; __pyx_t_4++){
-                        if (__pyx_parallel_why < 2)
                         {
                             __pyx_v_i = (int)(0 + 1 * __pyx_t_4);
 
-                            /* "parallel_sum.pyx":70
+                            /* "parallel_sum.pyx":71
  *         # reduction
  *         for i in prange(n, schedule='static'):
  *             total += arr[i]             # <<<<<<<<<<<<<<
@@ -5148,89 +5118,10 @@ static PyObject *__pyx_pf_12parallel_sum_6sum_parallel(CYTHON_UNUSED PyObject *_
  *     return total
  */
                             __pyx_t_6 = __pyx_v_i;
-                            __pyx_t_7 = -1;
-                            if (__pyx_t_6 < 0) {
-                              __pyx_t_6 += __pyx_pybuffernd_arr.diminfo[0].shape;
-                              if (unlikely(__pyx_t_6 < 0)) __pyx_t_7 = 0;
-                            } else if (unlikely(__pyx_t_6 >= __pyx_pybuffernd_arr.diminfo[0].shape)) __pyx_t_7 = 0;
-                            if (unlikely(__pyx_t_7 != -1)) {
-                              __Pyx_RaiseBufferIndexErrorNogil(__pyx_t_7);
-                              __PYX_ERR(0, 70, __pyx_L9_error)
-                            }
                             __pyx_v_total = (__pyx_v_total + (*__Pyx_BufPtrStrided1d(double *, __pyx_pybuffernd_arr.rcbuffer->pybuffer.buf, __pyx_t_6, __pyx_pybuffernd_arr.diminfo[0].strides)));
-                            goto __pyx_L12;
-                            __pyx_L9_error:;
-                            {
-                                #ifdef WITH_THREAD
-                                PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-                                #endif
-                                #ifdef _OPENMP
-                                #pragma omp flush(__pyx_parallel_exc_type)
-                                #endif /* _OPENMP */
-                                if (!__pyx_parallel_exc_type) {
-                                  __Pyx_ErrFetchWithState(&__pyx_parallel_exc_type, &__pyx_parallel_exc_value, &__pyx_parallel_exc_tb);
-                                  __pyx_parallel_filename = __pyx_filename; __pyx_parallel_lineno = __pyx_lineno; __pyx_parallel_clineno = __pyx_clineno;
-                                  __Pyx_GOTREF(__pyx_parallel_exc_type);
-                                }
-                                #ifdef WITH_THREAD
-                                __Pyx_PyGILState_Release(__pyx_gilstate_save);
-                                #endif
-                            }
-                            __pyx_parallel_why = 4;
-                            goto __pyx_L11;
-                            __pyx_L11:;
-                            #ifdef _OPENMP
-                            #pragma omp critical(__pyx_parallel_lastprivates0)
-                            #endif /* _OPENMP */
-                            {
-                                __pyx_parallel_temp0 = __pyx_v_i;
-                                __pyx_parallel_temp1 = __pyx_v_total;
-                            }
-                            __pyx_L12:;
-                            #ifdef _OPENMP
-                            #pragma omp flush(__pyx_parallel_why)
-                            #endif /* _OPENMP */
                         }
                     }
-                    #ifdef _OPENMP
-                    Py_END_ALLOW_THREADS
-                    #else
-{
-#ifdef WITH_THREAD
-                    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-                    #endif
-                    #endif /* _OPENMP */
-                    /* Clean up any temporaries */
-                    #ifdef WITH_THREAD
-                    __Pyx_PyGILState_Release(__pyx_gilstate_save);
-                    #endif
-                    #ifndef _OPENMP
-}
-#endif /* _OPENMP */
                 }
-            }
-            if (__pyx_parallel_exc_type) {
-              /* This may have been overridden by a continue, break or return in another thread. Prefer the error. */
-              __pyx_parallel_why = 4;
-            }
-            if (__pyx_parallel_why) {
-              __pyx_v_i = __pyx_parallel_temp0;
-              __pyx_v_total = __pyx_parallel_temp1;
-              switch (__pyx_parallel_why) {
-                    case 4:
-                {
-                    #ifdef WITH_THREAD
-                    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-                    #endif
-                    __Pyx_GIVEREF(__pyx_parallel_exc_type);
-                    __Pyx_ErrRestoreWithState(__pyx_parallel_exc_type, __pyx_parallel_exc_value, __pyx_parallel_exc_tb);
-                    __pyx_filename = __pyx_parallel_filename; __pyx_lineno = __pyx_parallel_lineno; __pyx_clineno = __pyx_parallel_clineno;
-                    #ifdef WITH_THREAD
-                    __Pyx_PyGILState_Release(__pyx_gilstate_save);
-                    #endif
-                }
-                goto __pyx_L5_error;
-              }
             }
         }
         #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
@@ -5241,7 +5132,7 @@ static PyObject *__pyx_pf_12parallel_sum_6sum_parallel(CYTHON_UNUSED PyObject *_
         #endif
       }
 
-      /* "parallel_sum.pyx":67
+      /* "parallel_sum.pyx":68
  *     # OpenMP parallel for
  *     #
  *     with nogil:             # <<<<<<<<<<<<<<
@@ -5256,18 +5147,11 @@ static PyObject *__pyx_pf_12parallel_sum_6sum_parallel(CYTHON_UNUSED PyObject *_
           #endif
           goto __pyx_L6;
         }
-        __pyx_L5_error: {
-          #ifdef WITH_THREAD
-          __Pyx_FastGIL_Forget();
-          Py_BLOCK_THREADS
-          #endif
-          goto __pyx_L1_error;
-        }
         __pyx_L6:;
       }
   }
 
-  /* "parallel_sum.pyx":72
+  /* "parallel_sum.pyx":73
  *             total += arr[i]
  * 
  *     return total             # <<<<<<<<<<<<<<
@@ -5275,13 +5159,13 @@ static PyObject *__pyx_pf_12parallel_sum_6sum_parallel(CYTHON_UNUSED PyObject *_
  * def benchmark_sum(np.ndarray[double, ndim=1] arr, int num_threads=0):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_8 = PyFloat_FromDouble(__pyx_v_total); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 72, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_8);
-  __pyx_r = __pyx_t_8;
-  __pyx_t_8 = 0;
+  __pyx_t_7 = PyFloat_FromDouble(__pyx_v_total); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_r = __pyx_t_7;
+  __pyx_t_7 = 0;
   goto __pyx_L0;
 
-  /* "parallel_sum.pyx":46
+  /* "parallel_sum.pyx":47
  *     return total
  * 
  * def sum_parallel(np.ndarray[double, ndim=1] arr, int num_threads=0):             # <<<<<<<<<<<<<<
@@ -5291,7 +5175,7 @@ static PyObject *__pyx_pf_12parallel_sum_6sum_parallel(CYTHON_UNUSED PyObject *_
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_8);
+  __Pyx_XDECREF(__pyx_t_7);
   { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
     __Pyx_PyThreadState_declare
     __Pyx_PyThreadState_assign
@@ -5309,7 +5193,7 @@ static PyObject *__pyx_pf_12parallel_sum_6sum_parallel(CYTHON_UNUSED PyObject *_
   return __pyx_r;
 }
 
-/* "parallel_sum.pyx":74
+/* "parallel_sum.pyx":75
  *     return total
  * 
  * def benchmark_sum(np.ndarray[double, ndim=1] arr, int num_threads=0):             # <<<<<<<<<<<<<<
@@ -5374,19 +5258,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 74, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 75, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_num_threads);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 74, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 75, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "benchmark_sum") < 0)) __PYX_ERR(0, 74, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "benchmark_sum") < 0)) __PYX_ERR(0, 75, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -5399,14 +5283,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     }
     __pyx_v_arr = ((PyArrayObject *)values[0]);
     if (values[1]) {
-      __pyx_v_num_threads = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 74, __pyx_L3_error)
+      __pyx_v_num_threads = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 75, __pyx_L3_error)
     } else {
       __pyx_v_num_threads = ((int)((int)0));
     }
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("benchmark_sum", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 74, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("benchmark_sum", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 75, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5420,7 +5304,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_arr), __pyx_ptype_5numpy_ndarray, 1, "arr", 0))) __PYX_ERR(0, 74, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_arr), __pyx_ptype_5numpy_ndarray, 1, "arr", 0))) __PYX_ERR(0, 75, __pyx_L1_error)
   __pyx_r = __pyx_pf_12parallel_sum_8benchmark_sum(__pyx_self, __pyx_v_arr, __pyx_v_num_threads);
 
   /* function exit code */
@@ -5468,11 +5352,11 @@ static PyObject *__pyx_pf_12parallel_sum_8benchmark_sum(CYTHON_UNUSED PyObject *
   __pyx_pybuffernd_arr.rcbuffer = &__pyx_pybuffer_arr;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_arr.rcbuffer->pybuffer, (PyObject*)__pyx_v_arr, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 74, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_arr.rcbuffer->pybuffer, (PyObject*)__pyx_v_arr, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 1, 0, __pyx_stack) == -1)) __PYX_ERR(0, 75, __pyx_L1_error)
   }
   __pyx_pybuffernd_arr.diminfo[0].strides = __pyx_pybuffernd_arr.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_arr.diminfo[0].shape = __pyx_pybuffernd_arr.rcbuffer->pybuffer.shape[0];
 
-  /* "parallel_sum.pyx":91
+  /* "parallel_sum.pyx":92
  * 
  *     #
  *     serial_start = omp_get_wtime()             # <<<<<<<<<<<<<<
@@ -5481,14 +5365,14 @@ static PyObject *__pyx_pf_12parallel_sum_8benchmark_sum(CYTHON_UNUSED PyObject *
  */
   __pyx_v_serial_start = omp_get_wtime();
 
-  /* "parallel_sum.pyx":92
+  /* "parallel_sum.pyx":93
  *     #
  *     serial_start = omp_get_wtime()
  *     serial_sum = sum_serial(arr)             # <<<<<<<<<<<<<<
  *     serial_end = omp_get_wtime()
  *     serial_time = serial_end - serial_start
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_sum_serial); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_sum_serial); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -5508,15 +5392,15 @@ static PyObject *__pyx_pf_12parallel_sum_8benchmark_sum(CYTHON_UNUSED PyObject *
     PyObject *__pyx_callargs[2] = {__pyx_t_3, ((PyObject *)__pyx_v_arr)};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 92, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 93, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_serial_sum = __pyx_t_5;
 
-  /* "parallel_sum.pyx":93
+  /* "parallel_sum.pyx":94
  *     serial_start = omp_get_wtime()
  *     serial_sum = sum_serial(arr)
  *     serial_end = omp_get_wtime()             # <<<<<<<<<<<<<<
@@ -5525,7 +5409,7 @@ static PyObject *__pyx_pf_12parallel_sum_8benchmark_sum(CYTHON_UNUSED PyObject *
  */
   __pyx_v_serial_end = omp_get_wtime();
 
-  /* "parallel_sum.pyx":94
+  /* "parallel_sum.pyx":95
  *     serial_sum = sum_serial(arr)
  *     serial_end = omp_get_wtime()
  *     serial_time = serial_end - serial_start             # <<<<<<<<<<<<<<
@@ -5534,7 +5418,7 @@ static PyObject *__pyx_pf_12parallel_sum_8benchmark_sum(CYTHON_UNUSED PyObject *
  */
   __pyx_v_serial_time = (__pyx_v_serial_end - __pyx_v_serial_start);
 
-  /* "parallel_sum.pyx":97
+  /* "parallel_sum.pyx":98
  * 
  *     #
  *     parallel_start = omp_get_wtime()             # <<<<<<<<<<<<<<
@@ -5543,16 +5427,16 @@ static PyObject *__pyx_pf_12parallel_sum_8benchmark_sum(CYTHON_UNUSED PyObject *
  */
   __pyx_v_parallel_start = omp_get_wtime();
 
-  /* "parallel_sum.pyx":98
+  /* "parallel_sum.pyx":99
  *     #
  *     parallel_start = omp_get_wtime()
  *     parallel_sum = sum_parallel(arr, num_threads)             # <<<<<<<<<<<<<<
  *     parallel_end = omp_get_wtime()
  *     parallel_time = parallel_end - parallel_start
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_sum_parallel); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_sum_parallel); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_6 = NULL;
   __pyx_t_4 = 0;
@@ -5573,15 +5457,15 @@ static PyObject *__pyx_pf_12parallel_sum_8benchmark_sum(CYTHON_UNUSED PyObject *
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 2+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 98, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 99, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_1); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 99, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_parallel_sum = __pyx_t_5;
 
-  /* "parallel_sum.pyx":99
+  /* "parallel_sum.pyx":100
  *     parallel_start = omp_get_wtime()
  *     parallel_sum = sum_parallel(arr, num_threads)
  *     parallel_end = omp_get_wtime()             # <<<<<<<<<<<<<<
@@ -5590,7 +5474,7 @@ static PyObject *__pyx_pf_12parallel_sum_8benchmark_sum(CYTHON_UNUSED PyObject *
  */
   __pyx_v_parallel_end = omp_get_wtime();
 
-  /* "parallel_sum.pyx":100
+  /* "parallel_sum.pyx":101
  *     parallel_sum = sum_parallel(arr, num_threads)
  *     parallel_end = omp_get_wtime()
  *     parallel_time = parallel_end - parallel_start             # <<<<<<<<<<<<<<
@@ -5599,7 +5483,7 @@ static PyObject *__pyx_pf_12parallel_sum_8benchmark_sum(CYTHON_UNUSED PyObject *
  */
   __pyx_v_parallel_time = (__pyx_v_parallel_end - __pyx_v_parallel_start);
 
-  /* "parallel_sum.pyx":102
+  /* "parallel_sum.pyx":103
  *     parallel_time = parallel_end - parallel_start
  * 
  *     return serial_time, parallel_time, serial_sum, parallel_sum             # <<<<<<<<<<<<<<
@@ -5607,24 +5491,24 @@ static PyObject *__pyx_pf_12parallel_sum_8benchmark_sum(CYTHON_UNUSED PyObject *
  * def create_work_array(int size):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_serial_time); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_serial_time); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_parallel_time); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_parallel_time); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_serial_sum); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_serial_sum); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_parallel_sum); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_parallel_sum); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyTuple_New(4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 102, __pyx_L1_error)
+  __pyx_t_7 = PyTuple_New(4); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 103, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_1)) __PYX_ERR(0, 102, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_1)) __PYX_ERR(0, 103, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_2)) __PYX_ERR(0, 102, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_2)) __PYX_ERR(0, 103, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_3);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 2, __pyx_t_3)) __PYX_ERR(0, 102, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 2, __pyx_t_3)) __PYX_ERR(0, 103, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_6);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 3, __pyx_t_6)) __PYX_ERR(0, 102, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 3, __pyx_t_6)) __PYX_ERR(0, 103, __pyx_L1_error);
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
@@ -5633,7 +5517,7 @@ static PyObject *__pyx_pf_12parallel_sum_8benchmark_sum(CYTHON_UNUSED PyObject *
   __pyx_t_7 = 0;
   goto __pyx_L0;
 
-  /* "parallel_sum.pyx":74
+  /* "parallel_sum.pyx":75
  *     return total
  * 
  * def benchmark_sum(np.ndarray[double, ndim=1] arr, int num_threads=0):             # <<<<<<<<<<<<<<
@@ -5665,7 +5549,7 @@ static PyObject *__pyx_pf_12parallel_sum_8benchmark_sum(CYTHON_UNUSED PyObject *
   return __pyx_r;
 }
 
-/* "parallel_sum.pyx":104
+/* "parallel_sum.pyx":105
  *     return serial_time, parallel_time, serial_sum, parallel_sum
  * 
  * def create_work_array(int size):             # <<<<<<<<<<<<<<
@@ -5727,23 +5611,23 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 104, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 105, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "create_work_array") < 0)) __PYX_ERR(0, 104, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "create_work_array") < 0)) __PYX_ERR(0, 105, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
     }
-    __pyx_v_size = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_size == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 104, __pyx_L3_error)
+    __pyx_v_size = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_size == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 105, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("create_work_array", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 104, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("create_work_array", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 105, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5783,21 +5667,21 @@ static PyObject *__pyx_pf_12parallel_sum_10create_work_array(CYTHON_UNUSED PyObj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("create_work_array", 1);
 
-  /* "parallel_sum.pyx":108
+  /* "parallel_sum.pyx":109
  *       .
  *     """
  *     return np.random.random(size)             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_random); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_random); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_random); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_random); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_size); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 108, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_size); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 109, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   __pyx_t_5 = 0;
@@ -5818,7 +5702,7 @@ static PyObject *__pyx_pf_12parallel_sum_10create_work_array(CYTHON_UNUSED PyObj
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 108, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 109, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
@@ -5826,7 +5710,7 @@ static PyObject *__pyx_pf_12parallel_sum_10create_work_array(CYTHON_UNUSED PyObj
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "parallel_sum.pyx":104
+  /* "parallel_sum.pyx":105
  *     return serial_time, parallel_time, serial_sum, parallel_sum
  * 
  * def create_work_array(int size):             # <<<<<<<<<<<<<<
@@ -5912,7 +5796,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
 }
 /* #### Code section: cached_builtins ### */
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 42, __pyx_L1_error)
   __pyx_builtin_ImportError = __Pyx_GetBuiltinName(__pyx_n_s_ImportError); if (!__pyx_builtin_ImportError) __PYX_ERR(1, 983, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
@@ -5946,77 +5830,77 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "parallel_sum.pyx":17
+  /* "parallel_sum.pyx":18
  *     double omp_get_wtime()
  * 
  * def get_num_threads():             # <<<<<<<<<<<<<<
  *     """
  *       OpenMP   .
  */
-  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_n_s_multiprocessing); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(1, __pyx_n_s_multiprocessing); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
-  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_sum_pyx, __pyx_n_s_get_num_threads, 17, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(0, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_sum_pyx, __pyx_n_s_get_num_threads, 18, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 18, __pyx_L1_error)
 
-  /* "parallel_sum.pyx":26
+  /* "parallel_sum.pyx":27
  *     return multiprocessing.cpu_count()
  * 
  * def set_num_threads(int num):             # <<<<<<<<<<<<<<
  *     """
  *     OpenMP   .
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_n_s_num); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_n_s_num); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
-  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_sum_pyx, __pyx_n_s_set_num_threads, 26, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_sum_pyx, __pyx_n_s_set_num_threads, 27, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 27, __pyx_L1_error)
 
-  /* "parallel_sum.pyx":32
+  /* "parallel_sum.pyx":33
  *     omp_set_num_threads(num)
  * 
  * def sum_serial(np.ndarray[double, ndim=1] arr):             # <<<<<<<<<<<<<<
  *     """
  *         .
  */
-  __pyx_tuple__8 = PyTuple_Pack(4, __pyx_n_s_arr, __pyx_n_s_i, __pyx_n_s_total, __pyx_n_s_n); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __pyx_tuple__8 = PyTuple_Pack(4, __pyx_n_s_arr, __pyx_n_s_i, __pyx_n_s_total, __pyx_n_s_n); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
-  __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_sum_pyx, __pyx_n_s_sum_serial, 32, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_sum_pyx, __pyx_n_s_sum_serial, 33, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(0, 33, __pyx_L1_error)
 
-  /* "parallel_sum.pyx":46
+  /* "parallel_sum.pyx":47
  *     return total
  * 
  * def sum_parallel(np.ndarray[double, ndim=1] arr, int num_threads=0):             # <<<<<<<<<<<<<<
  *     """
  *         .
  */
-  __pyx_tuple__10 = PyTuple_Pack(5, __pyx_n_s_arr, __pyx_n_s_num_threads, __pyx_n_s_i, __pyx_n_s_total, __pyx_n_s_n); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_tuple__10 = PyTuple_Pack(5, __pyx_n_s_arr, __pyx_n_s_num_threads, __pyx_n_s_i, __pyx_n_s_total, __pyx_n_s_n); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
-  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_sum_pyx, __pyx_n_s_sum_parallel, 46, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_sum_pyx, __pyx_n_s_sum_parallel, 47, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 47, __pyx_L1_error)
 
-  /* "parallel_sum.pyx":74
+  /* "parallel_sum.pyx":75
  *     return total
  * 
  * def benchmark_sum(np.ndarray[double, ndim=1] arr, int num_threads=0):             # <<<<<<<<<<<<<<
  *     """
  *          .
  */
-  __pyx_tuple__12 = PyTuple_Pack(10, __pyx_n_s_arr, __pyx_n_s_num_threads, __pyx_n_s_serial_start, __pyx_n_s_serial_end, __pyx_n_s_parallel_start, __pyx_n_s_parallel_end, __pyx_n_s_serial_time, __pyx_n_s_parallel_time, __pyx_n_s_serial_sum, __pyx_n_s_parallel_sum); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __pyx_tuple__12 = PyTuple_Pack(10, __pyx_n_s_arr, __pyx_n_s_num_threads, __pyx_n_s_serial_start, __pyx_n_s_serial_end, __pyx_n_s_parallel_start, __pyx_n_s_parallel_end, __pyx_n_s_serial_time, __pyx_n_s_parallel_time, __pyx_n_s_serial_sum, __pyx_n_s_parallel_sum); if (unlikely(!__pyx_tuple__12)) __PYX_ERR(0, 75, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__12);
   __Pyx_GIVEREF(__pyx_tuple__12);
-  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_sum_pyx, __pyx_n_s_benchmark_sum, 74, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __pyx_codeobj__13 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__12, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_sum_pyx, __pyx_n_s_benchmark_sum, 75, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__13)) __PYX_ERR(0, 75, __pyx_L1_error)
 
-  /* "parallel_sum.pyx":104
+  /* "parallel_sum.pyx":105
  *     return serial_time, parallel_time, serial_sum, parallel_sum
  * 
  * def create_work_array(int size):             # <<<<<<<<<<<<<<
  *     """
  *       .
  */
-  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_n_s_size); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_tuple__14 = PyTuple_Pack(1, __pyx_n_s_size); if (unlikely(!__pyx_tuple__14)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__14);
   __Pyx_GIVEREF(__pyx_tuple__14);
-  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_sum_pyx, __pyx_n_s_create_work_array, 104, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_codeobj__15 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__14, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_sum_pyx, __pyx_n_s_create_work_array, 105, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__15)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -6447,112 +6331,112 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "parallel_sum.pyx":4
- * # distutils: language=c++
+  /* "parallel_sum.pyx":5
+ * # cython: boundscheck=False, wraparound=False, cdivision=True, initializedcheck=False
  * 
  * import numpy as np             # <<<<<<<<<<<<<<
  * cimport numpy as np
  * from cython.parallel import prange, parallel
  */
-  __pyx_t_2 = __Pyx_ImportDottedModule(__pyx_n_s_numpy, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_ImportDottedModule(__pyx_n_s_numpy, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_2) < 0) __PYX_ERR(0, 4, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_2) < 0) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "parallel_sum.pyx":17
+  /* "parallel_sum.pyx":18
  *     double omp_get_wtime()
  * 
  * def get_num_threads():             # <<<<<<<<<<<<<<
  *     """
  *       OpenMP   .
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_12parallel_sum_1get_num_threads, 0, __pyx_n_s_get_num_threads, NULL, __pyx_n_s_parallel_sum, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_12parallel_sum_1get_num_threads, 0, __pyx_n_s_get_num_threads, NULL, __pyx_n_s_parallel_sum, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_num_threads, __pyx_t_2) < 0) __PYX_ERR(0, 17, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_get_num_threads, __pyx_t_2) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "parallel_sum.pyx":26
+  /* "parallel_sum.pyx":27
  *     return multiprocessing.cpu_count()
  * 
  * def set_num_threads(int num):             # <<<<<<<<<<<<<<
  *     """
  *     OpenMP   .
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_12parallel_sum_3set_num_threads, 0, __pyx_n_s_set_num_threads, NULL, __pyx_n_s_parallel_sum, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_12parallel_sum_3set_num_threads, 0, __pyx_n_s_set_num_threads, NULL, __pyx_n_s_parallel_sum, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_set_num_threads, __pyx_t_2) < 0) __PYX_ERR(0, 26, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_set_num_threads, __pyx_t_2) < 0) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "parallel_sum.pyx":32
+  /* "parallel_sum.pyx":33
  *     omp_set_num_threads(num)
  * 
  * def sum_serial(np.ndarray[double, ndim=1] arr):             # <<<<<<<<<<<<<<
  *     """
  *         .
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_12parallel_sum_5sum_serial, 0, __pyx_n_s_sum_serial, NULL, __pyx_n_s_parallel_sum, __pyx_d, ((PyObject *)__pyx_codeobj__9)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 32, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_12parallel_sum_5sum_serial, 0, __pyx_n_s_sum_serial, NULL, __pyx_n_s_parallel_sum, __pyx_d, ((PyObject *)__pyx_codeobj__9)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sum_serial, __pyx_t_2) < 0) __PYX_ERR(0, 32, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sum_serial, __pyx_t_2) < 0) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "parallel_sum.pyx":46
+  /* "parallel_sum.pyx":47
  *     return total
  * 
  * def sum_parallel(np.ndarray[double, ndim=1] arr, int num_threads=0):             # <<<<<<<<<<<<<<
  *     """
  *         .
  */
-  __pyx_t_2 = __Pyx_PyInt_From_int(((int)0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(((int)0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_12parallel_sum_7sum_parallel, 0, __pyx_n_s_sum_parallel, NULL, __pyx_n_s_parallel_sum, __pyx_d, ((PyObject *)__pyx_codeobj__11)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_12parallel_sum_7sum_parallel, 0, __pyx_n_s_sum_parallel, NULL, __pyx_n_s_parallel_sum, __pyx_d, ((PyObject *)__pyx_codeobj__11)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sum_parallel, __pyx_t_2) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_sum_parallel, __pyx_t_2) < 0) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "parallel_sum.pyx":74
+  /* "parallel_sum.pyx":75
  *     return total
  * 
  * def benchmark_sum(np.ndarray[double, ndim=1] arr, int num_threads=0):             # <<<<<<<<<<<<<<
  *     """
  *          .
  */
-  __pyx_t_2 = __Pyx_PyInt_From_int(((int)0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(((int)0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 75, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2)) __PYX_ERR(0, 74, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_12parallel_sum_9benchmark_sum, 0, __pyx_n_s_benchmark_sum, NULL, __pyx_n_s_parallel_sum, __pyx_d, ((PyObject *)__pyx_codeobj__13)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_12parallel_sum_9benchmark_sum, 0, __pyx_n_s_benchmark_sum, NULL, __pyx_n_s_parallel_sum, __pyx_d, ((PyObject *)__pyx_codeobj__13)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_benchmark_sum, __pyx_t_2) < 0) __PYX_ERR(0, 74, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_benchmark_sum, __pyx_t_2) < 0) __PYX_ERR(0, 75, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "parallel_sum.pyx":104
+  /* "parallel_sum.pyx":105
  *     return serial_time, parallel_time, serial_sum, parallel_sum
  * 
  * def create_work_array(int size):             # <<<<<<<<<<<<<<
  *     """
  *       .
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_12parallel_sum_11create_work_array, 0, __pyx_n_s_create_work_array, NULL, __pyx_n_s_parallel_sum, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 104, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_12parallel_sum_11create_work_array, 0, __pyx_n_s_create_work_array, NULL, __pyx_n_s_parallel_sum, __pyx_d, ((PyObject *)__pyx_codeobj__15)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_create_work_array, __pyx_t_2) < 0) __PYX_ERR(0, 104, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_create_work_array, __pyx_t_2) < 0) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "parallel_sum.pyx":1
  * # cython: language_level=3             # <<<<<<<<<<<<<<
  * # distutils: language=c++
- * 
+ * # cython: boundscheck=False, wraparound=False, cdivision=True, initializedcheck=False
  */
   __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -8576,23 +8460,6 @@ static int __Pyx__GetBufferAndValidate(
 fail:;
   __Pyx_SafeReleaseBuffer(buf);
   return -1;
-}
-
-/* BufferIndexError */
-  static void __Pyx_RaiseBufferIndexError(int axis) {
-  PyErr_Format(PyExc_IndexError,
-     "Out of bounds on buffer access (axis %d)", axis);
-}
-
-/* BufferIndexErrorNogil */
-  static void __Pyx_RaiseBufferIndexErrorNogil(int axis) {
-    #ifdef WITH_THREAD
-    PyGILState_STATE gilstate = PyGILState_Ensure();
-    #endif
-    __Pyx_RaiseBufferIndexError(axis);
-    #ifdef WITH_THREAD
-    PyGILState_Release(gilstate);
-    #endif
 }
 
 /* PyDictVersioning */

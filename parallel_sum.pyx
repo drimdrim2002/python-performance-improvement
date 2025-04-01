@@ -1,5 +1,6 @@
 # cython: language_level=3
 # distutils: language=c++
+# cython: boundscheck=False, wraparound=False, cdivision=True, initializedcheck=False
 
 import numpy as np
 cimport numpy as np

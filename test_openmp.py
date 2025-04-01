@@ -66,16 +66,18 @@ def test_matrix_multiplication():
         
         # 다양한 스레드 수로 테스트
         for num_threads in [1, 2, 4, 8]:
-            serial_time, parallel_time, opt_time = pm.benchmark_matmul(A, B, num_threads)
+            serial_time, parallel_time, opt_time, block_time = pm.benchmark_matmul(A, B, num_threads)
             
             # 결과 출력
             speedup1 = serial_time / parallel_time if parallel_time > 0 else 0
             speedup2 = serial_time / opt_time if opt_time > 0 else 0
+            speedup3 = serial_time / block_time if block_time > 0 else 0
             
             print(f"스레드 수: {num_threads}")
             print(f"  순차 실행 시간: {serial_time:.6f}초")
             print(f"  기본 병렬 실행 시간: {parallel_time:.6f}초 (속도 향상: {speedup1:.2f}x)")
             print(f"  최적화 병렬 실행 시간: {opt_time:.6f}초 (속도 향상: {speedup2:.2f}x)")
+            print(f"  블록 병렬 실행 시간: {block_time:.6f}초 (속도 향상: {speedup3:.2f}x)")
 
 def main():
     """

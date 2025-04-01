@@ -1271,6 +1271,8 @@ static CYTHON_INLINE float __PYX_NAN() {
 #include "numpy/arrayscalars.h"
 #include "numpy/ufuncobject.h"
 #include <omp.h>
+#include <stdlib.h>
+#include <math.h>
 #include "omp.h"
 #ifdef _OPENMP
 #include <omp.h>
@@ -2164,13 +2166,7 @@ static CYTHON_INLINE PyObject *__Pyx__GetModuleGlobalName(PyObject *name);
 /* ExtTypeTest.proto */
 static CYTHON_INLINE int __Pyx_TypeTest(PyObject *obj, PyTypeObject *type);
 
-/* BufferIndexError.proto */
-static void __Pyx_RaiseBufferIndexError(int axis);
-
 #define __Pyx_BufPtrStrided2d(type, buf, i0, s0, i1, s1) (type)((char*)buf + i0 * s0 + i1 * s1)
-/* BufferIndexErrorNogil.proto */
-static void __Pyx_RaiseBufferIndexErrorNogil(int axis);
-
 /* PyFunctionFastCall.proto */
 #if CYTHON_FAST_PYCALL
 #if !CYTHON_VECTORCALL
@@ -2623,6 +2619,10 @@ static CYTHON_INLINE char *__pyx_f_5numpy_7ndarray_4data_data(PyArrayObject *__p
 
 /* Module declarations from "openmp" */
 
+/* Module declarations from "libc.stdlib" */
+
+/* Module declarations from "libc.math" */
+
 /* Module declarations from "parallel_matmul" */
 /* #### Code section: typeinfo ### */
 static __Pyx_TypeInfo __Pyx_TypeInfo_double = { "double", NULL, sizeof(double), { 0 }, 0, 'R', 0, 0 };
@@ -2648,8 +2648,8 @@ static const char __pyx_k_p[] = "p";
 static const char __pyx_k__3[] = "*";
 static const char __pyx_k_np[] = "np";
 static const char __pyx_k_B_T[] = "B_T";
-static const char __pyx_k__10[] = "_";
-static const char __pyx_k__15[] = "?";
+static const char __pyx_k__12[] = "_";
+static const char __pyx_k__17[] = "?";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_size[] = "size";
@@ -2664,10 +2664,14 @@ static const char __pyx_k_random[] = "random";
 static const char __pyx_k_float64[] = "float64";
 static const char __pyx_k_opt_end[] = "opt_end";
 static const char __pyx_k_opt_time[] = "opt_time";
+static const char __pyx_k_block_end[] = "block_end";
 static const char __pyx_k_opt_start[] = "opt_start";
 static const char __pyx_k_transpose[] = "transpose";
+static const char __pyx_k_BLOCK_SIZE[] = "BLOCK_SIZE";
+static const char __pyx_k_block_time[] = "block_time";
 static const char __pyx_k_serial_end[] = "serial_end";
 static const char __pyx_k_ImportError[] = "ImportError";
+static const char __pyx_k_block_start[] = "block_start";
 static const char __pyx_k_num_threads[] = "num_threads";
 static const char __pyx_k_serial_time[] = "serial_time";
 static const char __pyx_k_initializing[] = "_initializing";
@@ -2681,9 +2685,11 @@ static const char __pyx_k_create_matrices[] = "create_matrices";
 static const char __pyx_k_matmul_parallel[] = "matmul_parallel";
 static const char __pyx_k_parallel_matmul[] = "parallel_matmul";
 static const char __pyx_k_benchmark_matmul[] = "benchmark_matmul";
+static const char __pyx_k_ascontiguousarray[] = "ascontiguousarray";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_parallel_matmul_pyx[] = "parallel_matmul.pyx";
+static const char __pyx_k_matmul_parallel_block[] = "matmul_parallel_block";
 static const char __pyx_k_matmul_parallel_optimized[] = "matmul_parallel_optimized";
 static const char __pyx_k_numpy_core_multiarray_failed_to[] = "numpy.core.multiarray failed to import";
 static const char __pyx_k_numpy_core_umath_failed_to_impor[] = "numpy.core.umath failed to import";
@@ -2691,8 +2697,9 @@ static const char __pyx_k_numpy_core_umath_failed_to_impor[] = "numpy.core.umath
 static PyObject *__pyx_pf_15parallel_matmul_matmul_serial(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_A, PyArrayObject *__pyx_v_B); /* proto */
 static PyObject *__pyx_pf_15parallel_matmul_2matmul_parallel(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_A, PyArrayObject *__pyx_v_B, int __pyx_v_num_threads); /* proto */
 static PyObject *__pyx_pf_15parallel_matmul_4matmul_parallel_optimized(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_A, PyArrayObject *__pyx_v_B, int __pyx_v_num_threads); /* proto */
-static PyObject *__pyx_pf_15parallel_matmul_6benchmark_matmul(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_A, PyArrayObject *__pyx_v_B, int __pyx_v_num_threads); /* proto */
-static PyObject *__pyx_pf_15parallel_matmul_8create_matrices(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_size); /* proto */
+static PyObject *__pyx_pf_15parallel_matmul_6matmul_parallel_block(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_A, PyArrayObject *__pyx_v_B, int __pyx_v_num_threads); /* proto */
+static PyObject *__pyx_pf_15parallel_matmul_8benchmark_matmul(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_A, PyArrayObject *__pyx_v_B, int __pyx_v_num_threads); /* proto */
+static PyObject *__pyx_pf_15parallel_matmul_10create_matrices(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_size); /* proto */
 /* #### Code section: late_includes ### */
 /* #### Code section: module_state ### */
 typedef struct {
@@ -2758,16 +2765,25 @@ typedef struct {
   #endif
   #if CYTHON_USE_MODULE_STATE
   #endif
+  #if CYTHON_USE_MODULE_STATE
+  #endif
+  #if CYTHON_USE_MODULE_STATE
+  #endif
   PyObject *__pyx_n_s_A;
   PyObject *__pyx_n_s_B;
+  PyObject *__pyx_n_s_BLOCK_SIZE;
   PyObject *__pyx_n_s_B_T;
   PyObject *__pyx_n_s_C;
   PyObject *__pyx_n_s_ImportError;
-  PyObject *__pyx_n_s__10;
-  PyObject *__pyx_n_s__15;
+  PyObject *__pyx_n_s__12;
+  PyObject *__pyx_n_s__17;
   PyObject *__pyx_n_s__3;
+  PyObject *__pyx_n_s_ascontiguousarray;
   PyObject *__pyx_n_s_asyncio_coroutines;
   PyObject *__pyx_n_s_benchmark_matmul;
+  PyObject *__pyx_n_s_block_end;
+  PyObject *__pyx_n_s_block_start;
+  PyObject *__pyx_n_s_block_time;
   PyObject *__pyx_n_s_cline_in_traceback;
   PyObject *__pyx_n_s_create_matrices;
   PyObject *__pyx_n_s_dtype;
@@ -2781,6 +2797,7 @@ typedef struct {
   PyObject *__pyx_n_s_m;
   PyObject *__pyx_n_s_main;
   PyObject *__pyx_n_s_matmul_parallel;
+  PyObject *__pyx_n_s_matmul_parallel_block;
   PyObject *__pyx_n_s_matmul_parallel_optimized;
   PyObject *__pyx_n_s_matmul_serial;
   PyObject *__pyx_n_s_n;
@@ -2814,13 +2831,15 @@ typedef struct {
   PyObject *__pyx_tuple__4;
   PyObject *__pyx_tuple__6;
   PyObject *__pyx_tuple__8;
-  PyObject *__pyx_tuple__11;
+  PyObject *__pyx_tuple__10;
   PyObject *__pyx_tuple__13;
+  PyObject *__pyx_tuple__15;
   PyObject *__pyx_codeobj__5;
   PyObject *__pyx_codeobj__7;
   PyObject *__pyx_codeobj__9;
-  PyObject *__pyx_codeobj__12;
+  PyObject *__pyx_codeobj__11;
   PyObject *__pyx_codeobj__14;
+  PyObject *__pyx_codeobj__16;
 } __pyx_mstate;
 
 #if CYTHON_USE_MODULE_STATE
@@ -2881,14 +2900,19 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_ptype_5numpy_ufunc);
   Py_CLEAR(clear_module_state->__pyx_n_s_A);
   Py_CLEAR(clear_module_state->__pyx_n_s_B);
+  Py_CLEAR(clear_module_state->__pyx_n_s_BLOCK_SIZE);
   Py_CLEAR(clear_module_state->__pyx_n_s_B_T);
   Py_CLEAR(clear_module_state->__pyx_n_s_C);
   Py_CLEAR(clear_module_state->__pyx_n_s_ImportError);
-  Py_CLEAR(clear_module_state->__pyx_n_s__10);
-  Py_CLEAR(clear_module_state->__pyx_n_s__15);
+  Py_CLEAR(clear_module_state->__pyx_n_s__12);
+  Py_CLEAR(clear_module_state->__pyx_n_s__17);
   Py_CLEAR(clear_module_state->__pyx_n_s__3);
+  Py_CLEAR(clear_module_state->__pyx_n_s_ascontiguousarray);
   Py_CLEAR(clear_module_state->__pyx_n_s_asyncio_coroutines);
   Py_CLEAR(clear_module_state->__pyx_n_s_benchmark_matmul);
+  Py_CLEAR(clear_module_state->__pyx_n_s_block_end);
+  Py_CLEAR(clear_module_state->__pyx_n_s_block_start);
+  Py_CLEAR(clear_module_state->__pyx_n_s_block_time);
   Py_CLEAR(clear_module_state->__pyx_n_s_cline_in_traceback);
   Py_CLEAR(clear_module_state->__pyx_n_s_create_matrices);
   Py_CLEAR(clear_module_state->__pyx_n_s_dtype);
@@ -2902,6 +2926,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_m);
   Py_CLEAR(clear_module_state->__pyx_n_s_main);
   Py_CLEAR(clear_module_state->__pyx_n_s_matmul_parallel);
+  Py_CLEAR(clear_module_state->__pyx_n_s_matmul_parallel_block);
   Py_CLEAR(clear_module_state->__pyx_n_s_matmul_parallel_optimized);
   Py_CLEAR(clear_module_state->__pyx_n_s_matmul_serial);
   Py_CLEAR(clear_module_state->__pyx_n_s_n);
@@ -2935,13 +2960,15 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_tuple__4);
   Py_CLEAR(clear_module_state->__pyx_tuple__6);
   Py_CLEAR(clear_module_state->__pyx_tuple__8);
-  Py_CLEAR(clear_module_state->__pyx_tuple__11);
+  Py_CLEAR(clear_module_state->__pyx_tuple__10);
   Py_CLEAR(clear_module_state->__pyx_tuple__13);
+  Py_CLEAR(clear_module_state->__pyx_tuple__15);
   Py_CLEAR(clear_module_state->__pyx_codeobj__5);
   Py_CLEAR(clear_module_state->__pyx_codeobj__7);
   Py_CLEAR(clear_module_state->__pyx_codeobj__9);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__12);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__11);
   Py_CLEAR(clear_module_state->__pyx_codeobj__14);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__16);
   return 0;
 }
 #endif
@@ -2980,14 +3007,19 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_ptype_5numpy_ufunc);
   Py_VISIT(traverse_module_state->__pyx_n_s_A);
   Py_VISIT(traverse_module_state->__pyx_n_s_B);
+  Py_VISIT(traverse_module_state->__pyx_n_s_BLOCK_SIZE);
   Py_VISIT(traverse_module_state->__pyx_n_s_B_T);
   Py_VISIT(traverse_module_state->__pyx_n_s_C);
   Py_VISIT(traverse_module_state->__pyx_n_s_ImportError);
-  Py_VISIT(traverse_module_state->__pyx_n_s__10);
-  Py_VISIT(traverse_module_state->__pyx_n_s__15);
+  Py_VISIT(traverse_module_state->__pyx_n_s__12);
+  Py_VISIT(traverse_module_state->__pyx_n_s__17);
   Py_VISIT(traverse_module_state->__pyx_n_s__3);
+  Py_VISIT(traverse_module_state->__pyx_n_s_ascontiguousarray);
   Py_VISIT(traverse_module_state->__pyx_n_s_asyncio_coroutines);
   Py_VISIT(traverse_module_state->__pyx_n_s_benchmark_matmul);
+  Py_VISIT(traverse_module_state->__pyx_n_s_block_end);
+  Py_VISIT(traverse_module_state->__pyx_n_s_block_start);
+  Py_VISIT(traverse_module_state->__pyx_n_s_block_time);
   Py_VISIT(traverse_module_state->__pyx_n_s_cline_in_traceback);
   Py_VISIT(traverse_module_state->__pyx_n_s_create_matrices);
   Py_VISIT(traverse_module_state->__pyx_n_s_dtype);
@@ -3001,6 +3033,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_m);
   Py_VISIT(traverse_module_state->__pyx_n_s_main);
   Py_VISIT(traverse_module_state->__pyx_n_s_matmul_parallel);
+  Py_VISIT(traverse_module_state->__pyx_n_s_matmul_parallel_block);
   Py_VISIT(traverse_module_state->__pyx_n_s_matmul_parallel_optimized);
   Py_VISIT(traverse_module_state->__pyx_n_s_matmul_serial);
   Py_VISIT(traverse_module_state->__pyx_n_s_n);
@@ -3034,13 +3067,15 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_tuple__4);
   Py_VISIT(traverse_module_state->__pyx_tuple__6);
   Py_VISIT(traverse_module_state->__pyx_tuple__8);
-  Py_VISIT(traverse_module_state->__pyx_tuple__11);
+  Py_VISIT(traverse_module_state->__pyx_tuple__10);
   Py_VISIT(traverse_module_state->__pyx_tuple__13);
+  Py_VISIT(traverse_module_state->__pyx_tuple__15);
   Py_VISIT(traverse_module_state->__pyx_codeobj__5);
   Py_VISIT(traverse_module_state->__pyx_codeobj__7);
   Py_VISIT(traverse_module_state->__pyx_codeobj__9);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__12);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__11);
   Py_VISIT(traverse_module_state->__pyx_codeobj__14);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__16);
   return 0;
 }
 #endif
@@ -3107,16 +3142,25 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #endif
 #if CYTHON_USE_MODULE_STATE
 #endif
+#if CYTHON_USE_MODULE_STATE
+#endif
+#if CYTHON_USE_MODULE_STATE
+#endif
 #define __pyx_n_s_A __pyx_mstate_global->__pyx_n_s_A
 #define __pyx_n_s_B __pyx_mstate_global->__pyx_n_s_B
+#define __pyx_n_s_BLOCK_SIZE __pyx_mstate_global->__pyx_n_s_BLOCK_SIZE
 #define __pyx_n_s_B_T __pyx_mstate_global->__pyx_n_s_B_T
 #define __pyx_n_s_C __pyx_mstate_global->__pyx_n_s_C
 #define __pyx_n_s_ImportError __pyx_mstate_global->__pyx_n_s_ImportError
-#define __pyx_n_s__10 __pyx_mstate_global->__pyx_n_s__10
-#define __pyx_n_s__15 __pyx_mstate_global->__pyx_n_s__15
+#define __pyx_n_s__12 __pyx_mstate_global->__pyx_n_s__12
+#define __pyx_n_s__17 __pyx_mstate_global->__pyx_n_s__17
 #define __pyx_n_s__3 __pyx_mstate_global->__pyx_n_s__3
+#define __pyx_n_s_ascontiguousarray __pyx_mstate_global->__pyx_n_s_ascontiguousarray
 #define __pyx_n_s_asyncio_coroutines __pyx_mstate_global->__pyx_n_s_asyncio_coroutines
 #define __pyx_n_s_benchmark_matmul __pyx_mstate_global->__pyx_n_s_benchmark_matmul
+#define __pyx_n_s_block_end __pyx_mstate_global->__pyx_n_s_block_end
+#define __pyx_n_s_block_start __pyx_mstate_global->__pyx_n_s_block_start
+#define __pyx_n_s_block_time __pyx_mstate_global->__pyx_n_s_block_time
 #define __pyx_n_s_cline_in_traceback __pyx_mstate_global->__pyx_n_s_cline_in_traceback
 #define __pyx_n_s_create_matrices __pyx_mstate_global->__pyx_n_s_create_matrices
 #define __pyx_n_s_dtype __pyx_mstate_global->__pyx_n_s_dtype
@@ -3130,6 +3174,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_m __pyx_mstate_global->__pyx_n_s_m
 #define __pyx_n_s_main __pyx_mstate_global->__pyx_n_s_main
 #define __pyx_n_s_matmul_parallel __pyx_mstate_global->__pyx_n_s_matmul_parallel
+#define __pyx_n_s_matmul_parallel_block __pyx_mstate_global->__pyx_n_s_matmul_parallel_block
 #define __pyx_n_s_matmul_parallel_optimized __pyx_mstate_global->__pyx_n_s_matmul_parallel_optimized
 #define __pyx_n_s_matmul_serial __pyx_mstate_global->__pyx_n_s_matmul_serial
 #define __pyx_n_s_n __pyx_mstate_global->__pyx_n_s_n
@@ -3163,13 +3208,15 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_tuple__4 __pyx_mstate_global->__pyx_tuple__4
 #define __pyx_tuple__6 __pyx_mstate_global->__pyx_tuple__6
 #define __pyx_tuple__8 __pyx_mstate_global->__pyx_tuple__8
-#define __pyx_tuple__11 __pyx_mstate_global->__pyx_tuple__11
+#define __pyx_tuple__10 __pyx_mstate_global->__pyx_tuple__10
 #define __pyx_tuple__13 __pyx_mstate_global->__pyx_tuple__13
+#define __pyx_tuple__15 __pyx_mstate_global->__pyx_tuple__15
 #define __pyx_codeobj__5 __pyx_mstate_global->__pyx_codeobj__5
 #define __pyx_codeobj__7 __pyx_mstate_global->__pyx_codeobj__7
 #define __pyx_codeobj__9 __pyx_mstate_global->__pyx_codeobj__9
-#define __pyx_codeobj__12 __pyx_mstate_global->__pyx_codeobj__12
+#define __pyx_codeobj__11 __pyx_mstate_global->__pyx_codeobj__11
 #define __pyx_codeobj__14 __pyx_mstate_global->__pyx_codeobj__14
+#define __pyx_codeobj__16 __pyx_mstate_global->__pyx_codeobj__16
 /* #### Code section: module_code ### */
 
 /* "../../../../.local/lib/python3.10/site-packages/numpy/__init__.cython-30.pxd":245
@@ -4434,8 +4481,50 @@ static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObjec
   return __pyx_r;
 }
 
-/* "parallel_matmul.pyx":16
- *     double omp_get_wtime()
+/* "parallel_matmul.pyx":21
+ * 
+ * #        inline
+ * cdef inline int c_min(int a, int b) nogil:             # <<<<<<<<<<<<<<
+ *     return a if a < b else b
+ * 
+ */
+
+static CYTHON_INLINE int __pyx_f_15parallel_matmul_c_min(int __pyx_v_a, int __pyx_v_b) {
+  int __pyx_r;
+  int __pyx_t_1;
+  int __pyx_t_2;
+
+  /* "parallel_matmul.pyx":22
+ * #        inline
+ * cdef inline int c_min(int a, int b) nogil:
+ *     return a if a < b else b             # <<<<<<<<<<<<<<
+ * 
+ * def matmul_serial(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B):
+ */
+  __pyx_t_2 = (__pyx_v_a < __pyx_v_b);
+  if (__pyx_t_2) {
+    __pyx_t_1 = __pyx_v_a;
+  } else {
+    __pyx_t_1 = __pyx_v_b;
+  }
+  __pyx_r = __pyx_t_1;
+  goto __pyx_L0;
+
+  /* "parallel_matmul.pyx":21
+ * 
+ * #        inline
+ * cdef inline int c_min(int a, int b) nogil:             # <<<<<<<<<<<<<<
+ *     return a if a < b else b
+ * 
+ */
+
+  /* function exit code */
+  __pyx_L0:;
+  return __pyx_r;
+}
+
+/* "parallel_matmul.pyx":24
+ *     return a if a < b else b
  * 
  * def matmul_serial(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B):             # <<<<<<<<<<<<<<
  *     """
@@ -4499,7 +4588,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 16, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 24, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -4507,14 +4596,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 16, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 24, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("matmul_serial", 1, 2, 2, 1); __PYX_ERR(0, 16, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("matmul_serial", 1, 2, 2, 1); __PYX_ERR(0, 24, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "matmul_serial") < 0)) __PYX_ERR(0, 16, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "matmul_serial") < 0)) __PYX_ERR(0, 24, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
@@ -4527,7 +4616,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("matmul_serial", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 16, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("matmul_serial", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 24, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4541,8 +4630,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_A), __pyx_ptype_5numpy_ndarray, 1, "A", 0))) __PYX_ERR(0, 16, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_B), __pyx_ptype_5numpy_ndarray, 1, "B", 0))) __PYX_ERR(0, 16, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_A), __pyx_ptype_5numpy_ndarray, 1, "A", 0))) __PYX_ERR(0, 24, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_B), __pyx_ptype_5numpy_ndarray, 1, "B", 0))) __PYX_ERR(0, 24, __pyx_L1_error)
   __pyx_r = __pyx_pf_15parallel_matmul_matmul_serial(__pyx_self, __pyx_v_A, __pyx_v_B);
 
   /* function exit code */
@@ -4594,11 +4683,10 @@ static PyObject *__pyx_pf_15parallel_matmul_matmul_serial(CYTHON_UNUSED PyObject
   int __pyx_t_16;
   Py_ssize_t __pyx_t_17;
   Py_ssize_t __pyx_t_18;
-  int __pyx_t_19;
+  Py_ssize_t __pyx_t_19;
   Py_ssize_t __pyx_t_20;
   Py_ssize_t __pyx_t_21;
   Py_ssize_t __pyx_t_22;
-  Py_ssize_t __pyx_t_23;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -4617,95 +4705,95 @@ static PyObject *__pyx_pf_15parallel_matmul_matmul_serial(CYTHON_UNUSED PyObject
   __pyx_pybuffernd_B.rcbuffer = &__pyx_pybuffer_B;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_A.rcbuffer->pybuffer, (PyObject*)__pyx_v_A, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 16, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_A.rcbuffer->pybuffer, (PyObject*)__pyx_v_A, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 24, __pyx_L1_error)
   }
   __pyx_pybuffernd_A.diminfo[0].strides = __pyx_pybuffernd_A.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_A.diminfo[0].shape = __pyx_pybuffernd_A.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_A.diminfo[1].strides = __pyx_pybuffernd_A.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_A.diminfo[1].shape = __pyx_pybuffernd_A.rcbuffer->pybuffer.shape[1];
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_B.rcbuffer->pybuffer, (PyObject*)__pyx_v_B, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 16, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_B.rcbuffer->pybuffer, (PyObject*)__pyx_v_B, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 24, __pyx_L1_error)
   }
   __pyx_pybuffernd_B.diminfo[0].strides = __pyx_pybuffernd_B.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_B.diminfo[0].shape = __pyx_pybuffernd_B.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_B.diminfo[1].strides = __pyx_pybuffernd_B.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_B.diminfo[1].shape = __pyx_pybuffernd_B.rcbuffer->pybuffer.shape[1];
 
-  /* "parallel_matmul.pyx":28
+  /* "parallel_matmul.pyx":36
  *     """
  *     cdef:
  *         int m = A.shape[0]             # <<<<<<<<<<<<<<
  *         int n = A.shape[1]
  *         int p = B.shape[1]
  */
-  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_A)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 28, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_A)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 36, __pyx_L1_error)
   __pyx_v_m = (__pyx_t_1[0]);
 
-  /* "parallel_matmul.pyx":29
+  /* "parallel_matmul.pyx":37
  *     cdef:
  *         int m = A.shape[0]
  *         int n = A.shape[1]             # <<<<<<<<<<<<<<
  *         int p = B.shape[1]
  *         np.ndarray[double, ndim=2] C = np.zeros((m, p), dtype=np.float64)
  */
-  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_A)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 29, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_A)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 37, __pyx_L1_error)
   __pyx_v_n = (__pyx_t_1[1]);
 
-  /* "parallel_matmul.pyx":30
+  /* "parallel_matmul.pyx":38
  *         int m = A.shape[0]
  *         int n = A.shape[1]
  *         int p = B.shape[1]             # <<<<<<<<<<<<<<
  *         np.ndarray[double, ndim=2] C = np.zeros((m, p), dtype=np.float64)
  *         int i, j, k
  */
-  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_B)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_B)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 38, __pyx_L1_error)
   __pyx_v_p = (__pyx_t_1[1]);
 
-  /* "parallel_matmul.pyx":31
+  /* "parallel_matmul.pyx":39
  *         int n = A.shape[1]
  *         int p = B.shape[1]
  *         np.ndarray[double, ndim=2] C = np.zeros((m, p), dtype=np.float64)             # <<<<<<<<<<<<<<
  *         int i, j, k
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_zeros); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_zeros); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_m); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_m); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_p); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_p); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2)) __PYX_ERR(0, 31, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_4);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_4)) __PYX_ERR(0, 31, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_4)) __PYX_ERR(0, 39, __pyx_L1_error);
   __pyx_t_2 = 0;
   __pyx_t_4 = 0;
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_5);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5)) __PYX_ERR(0, 31, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5)) __PYX_ERR(0, 39, __pyx_L1_error);
   __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 31, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (!(likely(((__pyx_t_6) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_6, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 31, __pyx_L1_error)
+  if (!(likely(((__pyx_t_6) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_6, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 39, __pyx_L1_error)
   __pyx_t_7 = ((PyArrayObject *)__pyx_t_6);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_C.rcbuffer->pybuffer, (PyObject*)__pyx_t_7, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES| PyBUF_WRITABLE, 2, 0, __pyx_stack) == -1)) {
       __pyx_v_C = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_C.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 31, __pyx_L1_error)
+      __PYX_ERR(0, 39, __pyx_L1_error)
     } else {__pyx_pybuffernd_C.diminfo[0].strides = __pyx_pybuffernd_C.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_C.diminfo[0].shape = __pyx_pybuffernd_C.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_C.diminfo[1].strides = __pyx_pybuffernd_C.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_C.diminfo[1].shape = __pyx_pybuffernd_C.rcbuffer->pybuffer.shape[1];
     }
   }
@@ -4713,7 +4801,7 @@ static PyObject *__pyx_pf_15parallel_matmul_matmul_serial(CYTHON_UNUSED PyObject
   __pyx_v_C = ((PyArrayObject *)__pyx_t_6);
   __pyx_t_6 = 0;
 
-  /* "parallel_matmul.pyx":35
+  /* "parallel_matmul.pyx":43
  * 
  *     #  3
  *     for i in range(m):             # <<<<<<<<<<<<<<
@@ -4725,7 +4813,7 @@ static PyObject *__pyx_pf_15parallel_matmul_matmul_serial(CYTHON_UNUSED PyObject
   for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_9; __pyx_t_10+=1) {
     __pyx_v_i = __pyx_t_10;
 
-    /* "parallel_matmul.pyx":36
+    /* "parallel_matmul.pyx":44
  *     #  3
  *     for i in range(m):
  *         for j in range(p):             # <<<<<<<<<<<<<<
@@ -4737,7 +4825,7 @@ static PyObject *__pyx_pf_15parallel_matmul_matmul_serial(CYTHON_UNUSED PyObject
     for (__pyx_t_13 = 0; __pyx_t_13 < __pyx_t_12; __pyx_t_13+=1) {
       __pyx_v_j = __pyx_t_13;
 
-      /* "parallel_matmul.pyx":37
+      /* "parallel_matmul.pyx":45
  *     for i in range(m):
  *         for j in range(p):
  *             for k in range(n):             # <<<<<<<<<<<<<<
@@ -4749,7 +4837,7 @@ static PyObject *__pyx_pf_15parallel_matmul_matmul_serial(CYTHON_UNUSED PyObject
       for (__pyx_t_16 = 0; __pyx_t_16 < __pyx_t_15; __pyx_t_16+=1) {
         __pyx_v_k = __pyx_t_16;
 
-        /* "parallel_matmul.pyx":38
+        /* "parallel_matmul.pyx":46
  *         for j in range(p):
  *             for k in range(n):
  *                 C[i, j] += A[i, k] * B[k, j]             # <<<<<<<<<<<<<<
@@ -4758,55 +4846,16 @@ static PyObject *__pyx_pf_15parallel_matmul_matmul_serial(CYTHON_UNUSED PyObject
  */
         __pyx_t_17 = __pyx_v_i;
         __pyx_t_18 = __pyx_v_k;
-        __pyx_t_19 = -1;
-        if (__pyx_t_17 < 0) {
-          __pyx_t_17 += __pyx_pybuffernd_A.diminfo[0].shape;
-          if (unlikely(__pyx_t_17 < 0)) __pyx_t_19 = 0;
-        } else if (unlikely(__pyx_t_17 >= __pyx_pybuffernd_A.diminfo[0].shape)) __pyx_t_19 = 0;
-        if (__pyx_t_18 < 0) {
-          __pyx_t_18 += __pyx_pybuffernd_A.diminfo[1].shape;
-          if (unlikely(__pyx_t_18 < 0)) __pyx_t_19 = 1;
-        } else if (unlikely(__pyx_t_18 >= __pyx_pybuffernd_A.diminfo[1].shape)) __pyx_t_19 = 1;
-        if (unlikely(__pyx_t_19 != -1)) {
-          __Pyx_RaiseBufferIndexError(__pyx_t_19);
-          __PYX_ERR(0, 38, __pyx_L1_error)
-        }
-        __pyx_t_20 = __pyx_v_k;
-        __pyx_t_21 = __pyx_v_j;
-        __pyx_t_19 = -1;
-        if (__pyx_t_20 < 0) {
-          __pyx_t_20 += __pyx_pybuffernd_B.diminfo[0].shape;
-          if (unlikely(__pyx_t_20 < 0)) __pyx_t_19 = 0;
-        } else if (unlikely(__pyx_t_20 >= __pyx_pybuffernd_B.diminfo[0].shape)) __pyx_t_19 = 0;
-        if (__pyx_t_21 < 0) {
-          __pyx_t_21 += __pyx_pybuffernd_B.diminfo[1].shape;
-          if (unlikely(__pyx_t_21 < 0)) __pyx_t_19 = 1;
-        } else if (unlikely(__pyx_t_21 >= __pyx_pybuffernd_B.diminfo[1].shape)) __pyx_t_19 = 1;
-        if (unlikely(__pyx_t_19 != -1)) {
-          __Pyx_RaiseBufferIndexError(__pyx_t_19);
-          __PYX_ERR(0, 38, __pyx_L1_error)
-        }
-        __pyx_t_22 = __pyx_v_i;
-        __pyx_t_23 = __pyx_v_j;
-        __pyx_t_19 = -1;
-        if (__pyx_t_22 < 0) {
-          __pyx_t_22 += __pyx_pybuffernd_C.diminfo[0].shape;
-          if (unlikely(__pyx_t_22 < 0)) __pyx_t_19 = 0;
-        } else if (unlikely(__pyx_t_22 >= __pyx_pybuffernd_C.diminfo[0].shape)) __pyx_t_19 = 0;
-        if (__pyx_t_23 < 0) {
-          __pyx_t_23 += __pyx_pybuffernd_C.diminfo[1].shape;
-          if (unlikely(__pyx_t_23 < 0)) __pyx_t_19 = 1;
-        } else if (unlikely(__pyx_t_23 >= __pyx_pybuffernd_C.diminfo[1].shape)) __pyx_t_19 = 1;
-        if (unlikely(__pyx_t_19 != -1)) {
-          __Pyx_RaiseBufferIndexError(__pyx_t_19);
-          __PYX_ERR(0, 38, __pyx_L1_error)
-        }
-        *__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_C.rcbuffer->pybuffer.buf, __pyx_t_22, __pyx_pybuffernd_C.diminfo[0].strides, __pyx_t_23, __pyx_pybuffernd_C.diminfo[1].strides) += ((*__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_A.rcbuffer->pybuffer.buf, __pyx_t_17, __pyx_pybuffernd_A.diminfo[0].strides, __pyx_t_18, __pyx_pybuffernd_A.diminfo[1].strides)) * (*__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_B.rcbuffer->pybuffer.buf, __pyx_t_20, __pyx_pybuffernd_B.diminfo[0].strides, __pyx_t_21, __pyx_pybuffernd_B.diminfo[1].strides)));
+        __pyx_t_19 = __pyx_v_k;
+        __pyx_t_20 = __pyx_v_j;
+        __pyx_t_21 = __pyx_v_i;
+        __pyx_t_22 = __pyx_v_j;
+        *__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_C.rcbuffer->pybuffer.buf, __pyx_t_21, __pyx_pybuffernd_C.diminfo[0].strides, __pyx_t_22, __pyx_pybuffernd_C.diminfo[1].strides) += ((*__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_A.rcbuffer->pybuffer.buf, __pyx_t_17, __pyx_pybuffernd_A.diminfo[0].strides, __pyx_t_18, __pyx_pybuffernd_A.diminfo[1].strides)) * (*__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_B.rcbuffer->pybuffer.buf, __pyx_t_19, __pyx_pybuffernd_B.diminfo[0].strides, __pyx_t_20, __pyx_pybuffernd_B.diminfo[1].strides)));
       }
     }
   }
 
-  /* "parallel_matmul.pyx":40
+  /* "parallel_matmul.pyx":48
  *                 C[i, j] += A[i, k] * B[k, j]
  * 
  *     return C             # <<<<<<<<<<<<<<
@@ -4818,8 +4867,8 @@ static PyObject *__pyx_pf_15parallel_matmul_matmul_serial(CYTHON_UNUSED PyObject
   __pyx_r = ((PyObject *)__pyx_v_C);
   goto __pyx_L0;
 
-  /* "parallel_matmul.pyx":16
- *     double omp_get_wtime()
+  /* "parallel_matmul.pyx":24
+ *     return a if a < b else b
  * 
  * def matmul_serial(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B):             # <<<<<<<<<<<<<<
  *     """
@@ -4855,7 +4904,7 @@ static PyObject *__pyx_pf_15parallel_matmul_matmul_serial(CYTHON_UNUSED PyObject
   return __pyx_r;
 }
 
-/* "parallel_matmul.pyx":42
+/* "parallel_matmul.pyx":50
  *     return C
  * 
  * def matmul_parallel(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B, int num_threads=0):             # <<<<<<<<<<<<<<
@@ -4923,7 +4972,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 42, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 50, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -4931,21 +4980,21 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 42, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 50, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("matmul_parallel", 0, 2, 3, 1); __PYX_ERR(0, 42, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("matmul_parallel", 0, 2, 3, 1); __PYX_ERR(0, 50, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_num_threads);
           if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 42, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 50, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "matmul_parallel") < 0)) __PYX_ERR(0, 42, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "matmul_parallel") < 0)) __PYX_ERR(0, 50, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -4960,14 +5009,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     __pyx_v_A = ((PyArrayObject *)values[0]);
     __pyx_v_B = ((PyArrayObject *)values[1]);
     if (values[2]) {
-      __pyx_v_num_threads = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 42, __pyx_L3_error)
+      __pyx_v_num_threads = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 50, __pyx_L3_error)
     } else {
       __pyx_v_num_threads = ((int)((int)0));
     }
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("matmul_parallel", 0, 2, 3, __pyx_nargs); __PYX_ERR(0, 42, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("matmul_parallel", 0, 2, 3, __pyx_nargs); __PYX_ERR(0, 50, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4981,8 +5030,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_A), __pyx_ptype_5numpy_ndarray, 1, "A", 0))) __PYX_ERR(0, 42, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_B), __pyx_ptype_5numpy_ndarray, 1, "B", 0))) __PYX_ERR(0, 42, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_A), __pyx_ptype_5numpy_ndarray, 1, "A", 0))) __PYX_ERR(0, 50, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_B), __pyx_ptype_5numpy_ndarray, 1, "B", 0))) __PYX_ERR(0, 50, __pyx_L1_error)
   __pyx_r = __pyx_pf_15parallel_matmul_2matmul_parallel(__pyx_self, __pyx_v_A, __pyx_v_B, __pyx_v_num_threads);
 
   /* function exit code */
@@ -5030,17 +5079,16 @@ static PyObject *__pyx_pf_15parallel_matmul_2matmul_parallel(CYTHON_UNUSED PyObj
   int __pyx_t_12;
   int __pyx_t_13;
   int __pyx_t_14;
-  int __pyx_t_15;
-  int __pyx_t_16;
+  Py_ssize_t __pyx_t_15;
+  Py_ssize_t __pyx_t_16;
   int __pyx_t_17;
   int __pyx_t_18;
-  Py_ssize_t __pyx_t_19;
-  Py_ssize_t __pyx_t_20;
-  int __pyx_t_21;
+  int __pyx_t_19;
+  int __pyx_t_20;
+  Py_ssize_t __pyx_t_21;
   Py_ssize_t __pyx_t_22;
   Py_ssize_t __pyx_t_23;
   Py_ssize_t __pyx_t_24;
-  Py_ssize_t __pyx_t_25;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -5059,95 +5107,95 @@ static PyObject *__pyx_pf_15parallel_matmul_2matmul_parallel(CYTHON_UNUSED PyObj
   __pyx_pybuffernd_B.rcbuffer = &__pyx_pybuffer_B;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_A.rcbuffer->pybuffer, (PyObject*)__pyx_v_A, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 42, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_A.rcbuffer->pybuffer, (PyObject*)__pyx_v_A, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 50, __pyx_L1_error)
   }
   __pyx_pybuffernd_A.diminfo[0].strides = __pyx_pybuffernd_A.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_A.diminfo[0].shape = __pyx_pybuffernd_A.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_A.diminfo[1].strides = __pyx_pybuffernd_A.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_A.diminfo[1].shape = __pyx_pybuffernd_A.rcbuffer->pybuffer.shape[1];
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_B.rcbuffer->pybuffer, (PyObject*)__pyx_v_B, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 42, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_B.rcbuffer->pybuffer, (PyObject*)__pyx_v_B, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 50, __pyx_L1_error)
   }
   __pyx_pybuffernd_B.diminfo[0].strides = __pyx_pybuffernd_B.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_B.diminfo[0].shape = __pyx_pybuffernd_B.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_B.diminfo[1].strides = __pyx_pybuffernd_B.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_B.diminfo[1].shape = __pyx_pybuffernd_B.rcbuffer->pybuffer.shape[1];
 
-  /* "parallel_matmul.pyx":55
+  /* "parallel_matmul.pyx":63
  *     """
  *     cdef:
  *         int m = A.shape[0]             # <<<<<<<<<<<<<<
  *         int n = A.shape[1]
  *         int p = B.shape[1]
  */
-  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_A)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 55, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_A)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 63, __pyx_L1_error)
   __pyx_v_m = (__pyx_t_1[0]);
 
-  /* "parallel_matmul.pyx":56
+  /* "parallel_matmul.pyx":64
  *     cdef:
  *         int m = A.shape[0]
  *         int n = A.shape[1]             # <<<<<<<<<<<<<<
  *         int p = B.shape[1]
  *         np.ndarray[double, ndim=2] C = np.zeros((m, p), dtype=np.float64)
  */
-  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_A)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 56, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_A)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 64, __pyx_L1_error)
   __pyx_v_n = (__pyx_t_1[1]);
 
-  /* "parallel_matmul.pyx":57
+  /* "parallel_matmul.pyx":65
  *         int m = A.shape[0]
  *         int n = A.shape[1]
  *         int p = B.shape[1]             # <<<<<<<<<<<<<<
  *         np.ndarray[double, ndim=2] C = np.zeros((m, p), dtype=np.float64)
  *         int i, j, k
  */
-  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_B)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_B)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 65, __pyx_L1_error)
   __pyx_v_p = (__pyx_t_1[1]);
 
-  /* "parallel_matmul.pyx":58
+  /* "parallel_matmul.pyx":66
  *         int n = A.shape[1]
  *         int p = B.shape[1]
  *         np.ndarray[double, ndim=2] C = np.zeros((m, p), dtype=np.float64)             # <<<<<<<<<<<<<<
  *         int i, j, k
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_zeros); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_zeros); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_m); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_m); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_p); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_p); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2)) __PYX_ERR(0, 58, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_4);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_4)) __PYX_ERR(0, 58, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_4)) __PYX_ERR(0, 66, __pyx_L1_error);
   __pyx_t_2 = 0;
   __pyx_t_4 = 0;
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_5);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5)) __PYX_ERR(0, 58, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5)) __PYX_ERR(0, 66, __pyx_L1_error);
   __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 58, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 66, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (!(likely(((__pyx_t_6) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_6, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 58, __pyx_L1_error)
+  if (!(likely(((__pyx_t_6) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_6, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 66, __pyx_L1_error)
   __pyx_t_7 = ((PyArrayObject *)__pyx_t_6);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_C.rcbuffer->pybuffer, (PyObject*)__pyx_t_7, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES| PyBUF_WRITABLE, 2, 0, __pyx_stack) == -1)) {
       __pyx_v_C = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_C.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 58, __pyx_L1_error)
+      __PYX_ERR(0, 66, __pyx_L1_error)
     } else {__pyx_pybuffernd_C.diminfo[0].strides = __pyx_pybuffernd_C.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_C.diminfo[0].shape = __pyx_pybuffernd_C.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_C.diminfo[1].strides = __pyx_pybuffernd_C.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_C.diminfo[1].shape = __pyx_pybuffernd_C.rcbuffer->pybuffer.shape[1];
     }
   }
@@ -5155,7 +5203,7 @@ static PyObject *__pyx_pf_15parallel_matmul_2matmul_parallel(CYTHON_UNUSED PyObj
   __pyx_v_C = ((PyArrayObject *)__pyx_t_6);
   __pyx_t_6 = 0;
 
-  /* "parallel_matmul.pyx":61
+  /* "parallel_matmul.pyx":69
  *         int i, j, k
  * 
  *     if num_threads > 0:             # <<<<<<<<<<<<<<
@@ -5165,7 +5213,7 @@ static PyObject *__pyx_pf_15parallel_matmul_2matmul_parallel(CYTHON_UNUSED PyObj
   __pyx_t_8 = (__pyx_v_num_threads > 0);
   if (__pyx_t_8) {
 
-    /* "parallel_matmul.pyx":62
+    /* "parallel_matmul.pyx":70
  * 
  *     if num_threads > 0:
  *         omp_set_num_threads(num_threads)             # <<<<<<<<<<<<<<
@@ -5174,7 +5222,7 @@ static PyObject *__pyx_pf_15parallel_matmul_2matmul_parallel(CYTHON_UNUSED PyObj
  */
     omp_set_num_threads(__pyx_v_num_threads);
 
-    /* "parallel_matmul.pyx":61
+    /* "parallel_matmul.pyx":69
  *         int i, j, k
  * 
  *     if num_threads > 0:             # <<<<<<<<<<<<<<
@@ -5183,11 +5231,48 @@ static PyObject *__pyx_pf_15parallel_matmul_2matmul_parallel(CYTHON_UNUSED PyObj
  */
   }
 
-  /* "parallel_matmul.pyx":67
- *     # schedule='dynamic'
+  /* "parallel_matmul.pyx":73
+ * 
  *     #
+ *     for i in range(m):             # <<<<<<<<<<<<<<
+ *         for j in range(p):
+ *             C[i, j] = 0.0
+ */
+  __pyx_t_9 = __pyx_v_m;
+  __pyx_t_10 = __pyx_t_9;
+  for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
+    __pyx_v_i = __pyx_t_11;
+
+    /* "parallel_matmul.pyx":74
+ *     #
+ *     for i in range(m):
+ *         for j in range(p):             # <<<<<<<<<<<<<<
+ *             C[i, j] = 0.0
+ * 
+ */
+    __pyx_t_12 = __pyx_v_p;
+    __pyx_t_13 = __pyx_t_12;
+    for (__pyx_t_14 = 0; __pyx_t_14 < __pyx_t_13; __pyx_t_14+=1) {
+      __pyx_v_j = __pyx_t_14;
+
+      /* "parallel_matmul.pyx":75
+ *     for i in range(m):
+ *         for j in range(p):
+ *             C[i, j] = 0.0             # <<<<<<<<<<<<<<
+ * 
+ *     #    :
+ */
+      __pyx_t_15 = __pyx_v_i;
+      __pyx_t_16 = __pyx_v_j;
+      *__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_C.rcbuffer->pybuffer.buf, __pyx_t_15, __pyx_pybuffernd_C.diminfo[0].strides, __pyx_t_16, __pyx_pybuffernd_C.diminfo[1].strides) = 0.0;
+    }
+  }
+
+  /* "parallel_matmul.pyx":78
+ * 
+ *     #    :
  *     with nogil:             # <<<<<<<<<<<<<<
- *         for i in prange(m, schedule='dynamic', chunksize=1):
+ *         for i in prange(m, schedule='guided', chunksize=4):
  *             for j in range(p):
  */
   {
@@ -5199,23 +5284,16 @@ static PyObject *__pyx_pf_15parallel_matmul_2matmul_parallel(CYTHON_UNUSED PyObj
       #endif
       /*try:*/ {
 
-        /* "parallel_matmul.pyx":68
- *     #
+        /* "parallel_matmul.pyx":79
+ *     #    :
  *     with nogil:
- *         for i in prange(m, schedule='dynamic', chunksize=1):             # <<<<<<<<<<<<<<
+ *         for i in prange(m, schedule='guided', chunksize=4):             # <<<<<<<<<<<<<<
  *             for j in range(p):
  *                 for k in range(n):
  */
         __pyx_t_9 = __pyx_v_m;
         {
-            int __pyx_parallel_temp0 = ((int)0xbad0bad0);
-            int __pyx_parallel_temp1 = ((int)0xbad0bad0);
-            int __pyx_parallel_temp2 = ((int)0xbad0bad0);
-            const char *__pyx_parallel_filename = NULL; int __pyx_parallel_lineno = 0, __pyx_parallel_clineno = 0;
-            PyObject *__pyx_parallel_exc_type = NULL, *__pyx_parallel_exc_value = NULL, *__pyx_parallel_exc_tb = NULL;
-            int __pyx_parallel_why;
-            __pyx_parallel_why = 0;
-            __pyx_t_12 = 1;
+            __pyx_t_12 = 4;
             #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
                 #undef likely
                 #undef unlikely
@@ -5226,180 +5304,62 @@ static PyObject *__pyx_pf_15parallel_matmul_2matmul_parallel(CYTHON_UNUSED PyObj
             if (__pyx_t_11 > 0)
             {
                 #ifdef _OPENMP
-                #pragma omp parallel private(__pyx_t_13, __pyx_t_14, __pyx_t_15, __pyx_t_16, __pyx_t_17, __pyx_t_18, __pyx_t_19, __pyx_t_20, __pyx_t_21, __pyx_t_22, __pyx_t_23, __pyx_t_24, __pyx_t_25) private(__pyx_filename, __pyx_lineno, __pyx_clineno) shared(__pyx_parallel_why, __pyx_parallel_exc_type, __pyx_parallel_exc_value, __pyx_parallel_exc_tb)
+                #pragma omp parallel private(__pyx_t_13, __pyx_t_14, __pyx_t_15, __pyx_t_16, __pyx_t_17, __pyx_t_18, __pyx_t_19, __pyx_t_20, __pyx_t_21, __pyx_t_22, __pyx_t_23, __pyx_t_24)
                 #endif /* _OPENMP */
                 {
                     #ifdef _OPENMP
-                    #ifdef WITH_THREAD
-                    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-                    #endif
-                    Py_BEGIN_ALLOW_THREADS
-                    #endif /* _OPENMP */
-                    #ifdef _OPENMP
-                    #pragma omp for firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) lastprivate(__pyx_v_j) lastprivate(__pyx_v_k) schedule(dynamic, __pyx_t_12)
+                    #pragma omp for firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) lastprivate(__pyx_v_j) lastprivate(__pyx_v_k) schedule(guided, __pyx_t_12)
                     #endif /* _OPENMP */
                     for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_11; __pyx_t_10++){
-                        if (__pyx_parallel_why < 2)
                         {
                             __pyx_v_i = (int)(0 + 1 * __pyx_t_10);
                             /* Initialize private variables to invalid values */
                             __pyx_v_j = ((int)0xbad0bad0);
                             __pyx_v_k = ((int)0xbad0bad0);
 
-                            /* "parallel_matmul.pyx":69
+                            /* "parallel_matmul.pyx":80
  *     with nogil:
- *         for i in prange(m, schedule='dynamic', chunksize=1):
+ *         for i in prange(m, schedule='guided', chunksize=4):
  *             for j in range(p):             # <<<<<<<<<<<<<<
  *                 for k in range(n):
  *                     C[i, j] += A[i, k] * B[k, j]
  */
                             __pyx_t_13 = __pyx_v_p;
                             __pyx_t_14 = __pyx_t_13;
-                            for (__pyx_t_15 = 0; __pyx_t_15 < __pyx_t_14; __pyx_t_15+=1) {
-                              __pyx_v_j = __pyx_t_15;
+                            for (__pyx_t_17 = 0; __pyx_t_17 < __pyx_t_14; __pyx_t_17+=1) {
+                              __pyx_v_j = __pyx_t_17;
 
-                              /* "parallel_matmul.pyx":70
- *         for i in prange(m, schedule='dynamic', chunksize=1):
+                              /* "parallel_matmul.pyx":81
+ *         for i in prange(m, schedule='guided', chunksize=4):
  *             for j in range(p):
  *                 for k in range(n):             # <<<<<<<<<<<<<<
  *                     C[i, j] += A[i, k] * B[k, j]
  * 
  */
-                              __pyx_t_16 = __pyx_v_n;
-                              __pyx_t_17 = __pyx_t_16;
-                              for (__pyx_t_18 = 0; __pyx_t_18 < __pyx_t_17; __pyx_t_18+=1) {
-                                __pyx_v_k = __pyx_t_18;
+                              __pyx_t_18 = __pyx_v_n;
+                              __pyx_t_19 = __pyx_t_18;
+                              for (__pyx_t_20 = 0; __pyx_t_20 < __pyx_t_19; __pyx_t_20+=1) {
+                                __pyx_v_k = __pyx_t_20;
 
-                                /* "parallel_matmul.pyx":71
+                                /* "parallel_matmul.pyx":82
  *             for j in range(p):
  *                 for k in range(n):
  *                     C[i, j] += A[i, k] * B[k, j]             # <<<<<<<<<<<<<<
  * 
  *     return C
  */
-                                __pyx_t_19 = __pyx_v_i;
-                                __pyx_t_20 = __pyx_v_k;
-                                __pyx_t_21 = -1;
-                                if (__pyx_t_19 < 0) {
-                                  __pyx_t_19 += __pyx_pybuffernd_A.diminfo[0].shape;
-                                  if (unlikely(__pyx_t_19 < 0)) __pyx_t_21 = 0;
-                                } else if (unlikely(__pyx_t_19 >= __pyx_pybuffernd_A.diminfo[0].shape)) __pyx_t_21 = 0;
-                                if (__pyx_t_20 < 0) {
-                                  __pyx_t_20 += __pyx_pybuffernd_A.diminfo[1].shape;
-                                  if (unlikely(__pyx_t_20 < 0)) __pyx_t_21 = 1;
-                                } else if (unlikely(__pyx_t_20 >= __pyx_pybuffernd_A.diminfo[1].shape)) __pyx_t_21 = 1;
-                                if (unlikely(__pyx_t_21 != -1)) {
-                                  __Pyx_RaiseBufferIndexErrorNogil(__pyx_t_21);
-                                  __PYX_ERR(0, 71, __pyx_L9_error)
-                                }
-                                __pyx_t_22 = __pyx_v_k;
-                                __pyx_t_23 = __pyx_v_j;
-                                __pyx_t_21 = -1;
-                                if (__pyx_t_22 < 0) {
-                                  __pyx_t_22 += __pyx_pybuffernd_B.diminfo[0].shape;
-                                  if (unlikely(__pyx_t_22 < 0)) __pyx_t_21 = 0;
-                                } else if (unlikely(__pyx_t_22 >= __pyx_pybuffernd_B.diminfo[0].shape)) __pyx_t_21 = 0;
-                                if (__pyx_t_23 < 0) {
-                                  __pyx_t_23 += __pyx_pybuffernd_B.diminfo[1].shape;
-                                  if (unlikely(__pyx_t_23 < 0)) __pyx_t_21 = 1;
-                                } else if (unlikely(__pyx_t_23 >= __pyx_pybuffernd_B.diminfo[1].shape)) __pyx_t_21 = 1;
-                                if (unlikely(__pyx_t_21 != -1)) {
-                                  __Pyx_RaiseBufferIndexErrorNogil(__pyx_t_21);
-                                  __PYX_ERR(0, 71, __pyx_L9_error)
-                                }
-                                __pyx_t_24 = __pyx_v_i;
-                                __pyx_t_25 = __pyx_v_j;
-                                __pyx_t_21 = -1;
-                                if (__pyx_t_24 < 0) {
-                                  __pyx_t_24 += __pyx_pybuffernd_C.diminfo[0].shape;
-                                  if (unlikely(__pyx_t_24 < 0)) __pyx_t_21 = 0;
-                                } else if (unlikely(__pyx_t_24 >= __pyx_pybuffernd_C.diminfo[0].shape)) __pyx_t_21 = 0;
-                                if (__pyx_t_25 < 0) {
-                                  __pyx_t_25 += __pyx_pybuffernd_C.diminfo[1].shape;
-                                  if (unlikely(__pyx_t_25 < 0)) __pyx_t_21 = 1;
-                                } else if (unlikely(__pyx_t_25 >= __pyx_pybuffernd_C.diminfo[1].shape)) __pyx_t_21 = 1;
-                                if (unlikely(__pyx_t_21 != -1)) {
-                                  __Pyx_RaiseBufferIndexErrorNogil(__pyx_t_21);
-                                  __PYX_ERR(0, 71, __pyx_L9_error)
-                                }
-                                *__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_C.rcbuffer->pybuffer.buf, __pyx_t_24, __pyx_pybuffernd_C.diminfo[0].strides, __pyx_t_25, __pyx_pybuffernd_C.diminfo[1].strides) += ((*__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_A.rcbuffer->pybuffer.buf, __pyx_t_19, __pyx_pybuffernd_A.diminfo[0].strides, __pyx_t_20, __pyx_pybuffernd_A.diminfo[1].strides)) * (*__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_B.rcbuffer->pybuffer.buf, __pyx_t_22, __pyx_pybuffernd_B.diminfo[0].strides, __pyx_t_23, __pyx_pybuffernd_B.diminfo[1].strides)));
+                                __pyx_t_16 = __pyx_v_i;
+                                __pyx_t_15 = __pyx_v_k;
+                                __pyx_t_21 = __pyx_v_k;
+                                __pyx_t_22 = __pyx_v_j;
+                                __pyx_t_23 = __pyx_v_i;
+                                __pyx_t_24 = __pyx_v_j;
+                                *__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_C.rcbuffer->pybuffer.buf, __pyx_t_23, __pyx_pybuffernd_C.diminfo[0].strides, __pyx_t_24, __pyx_pybuffernd_C.diminfo[1].strides) += ((*__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_A.rcbuffer->pybuffer.buf, __pyx_t_16, __pyx_pybuffernd_A.diminfo[0].strides, __pyx_t_15, __pyx_pybuffernd_A.diminfo[1].strides)) * (*__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_B.rcbuffer->pybuffer.buf, __pyx_t_21, __pyx_pybuffernd_B.diminfo[0].strides, __pyx_t_22, __pyx_pybuffernd_B.diminfo[1].strides)));
                               }
                             }
-                            goto __pyx_L16;
-                            __pyx_L9_error:;
-                            {
-                                #ifdef WITH_THREAD
-                                PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-                                #endif
-                                #ifdef _OPENMP
-                                #pragma omp flush(__pyx_parallel_exc_type)
-                                #endif /* _OPENMP */
-                                if (!__pyx_parallel_exc_type) {
-                                  __Pyx_ErrFetchWithState(&__pyx_parallel_exc_type, &__pyx_parallel_exc_value, &__pyx_parallel_exc_tb);
-                                  __pyx_parallel_filename = __pyx_filename; __pyx_parallel_lineno = __pyx_lineno; __pyx_parallel_clineno = __pyx_clineno;
-                                  __Pyx_GOTREF(__pyx_parallel_exc_type);
-                                }
-                                #ifdef WITH_THREAD
-                                __Pyx_PyGILState_Release(__pyx_gilstate_save);
-                                #endif
-                            }
-                            __pyx_parallel_why = 4;
-                            goto __pyx_L15;
-                            __pyx_L15:;
-                            #ifdef _OPENMP
-                            #pragma omp critical(__pyx_parallel_lastprivates0)
-                            #endif /* _OPENMP */
-                            {
-                                __pyx_parallel_temp0 = __pyx_v_i;
-                                __pyx_parallel_temp1 = __pyx_v_j;
-                                __pyx_parallel_temp2 = __pyx_v_k;
-                            }
-                            __pyx_L16:;
-                            #ifdef _OPENMP
-                            #pragma omp flush(__pyx_parallel_why)
-                            #endif /* _OPENMP */
                         }
                     }
-                    #ifdef _OPENMP
-                    Py_END_ALLOW_THREADS
-                    #else
-{
-#ifdef WITH_THREAD
-                    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-                    #endif
-                    #endif /* _OPENMP */
-                    /* Clean up any temporaries */
-                    #ifdef WITH_THREAD
-                    __Pyx_PyGILState_Release(__pyx_gilstate_save);
-                    #endif
-                    #ifndef _OPENMP
-}
-#endif /* _OPENMP */
                 }
-            }
-            if (__pyx_parallel_exc_type) {
-              /* This may have been overridden by a continue, break or return in another thread. Prefer the error. */
-              __pyx_parallel_why = 4;
-            }
-            if (__pyx_parallel_why) {
-              __pyx_v_i = __pyx_parallel_temp0;
-              __pyx_v_j = __pyx_parallel_temp1;
-              __pyx_v_k = __pyx_parallel_temp2;
-              switch (__pyx_parallel_why) {
-                    case 4:
-                {
-                    #ifdef WITH_THREAD
-                    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-                    #endif
-                    __Pyx_GIVEREF(__pyx_parallel_exc_type);
-                    __Pyx_ErrRestoreWithState(__pyx_parallel_exc_type, __pyx_parallel_exc_value, __pyx_parallel_exc_tb);
-                    __pyx_filename = __pyx_parallel_filename; __pyx_lineno = __pyx_parallel_lineno; __pyx_clineno = __pyx_parallel_clineno;
-                    #ifdef WITH_THREAD
-                    __Pyx_PyGILState_Release(__pyx_gilstate_save);
-                    #endif
-                }
-                goto __pyx_L5_error;
-              }
             }
         }
         #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
@@ -5410,11 +5370,11 @@ static PyObject *__pyx_pf_15parallel_matmul_2matmul_parallel(CYTHON_UNUSED PyObj
         #endif
       }
 
-      /* "parallel_matmul.pyx":67
- *     # schedule='dynamic'
- *     #
+      /* "parallel_matmul.pyx":78
+ * 
+ *     #    :
  *     with nogil:             # <<<<<<<<<<<<<<
- *         for i in prange(m, schedule='dynamic', chunksize=1):
+ *         for i in prange(m, schedule='guided', chunksize=4):
  *             for j in range(p):
  */
       /*finally:*/ {
@@ -5423,20 +5383,13 @@ static PyObject *__pyx_pf_15parallel_matmul_2matmul_parallel(CYTHON_UNUSED PyObj
           __Pyx_FastGIL_Forget();
           Py_BLOCK_THREADS
           #endif
-          goto __pyx_L6;
+          goto __pyx_L10;
         }
-        __pyx_L5_error: {
-          #ifdef WITH_THREAD
-          __Pyx_FastGIL_Forget();
-          Py_BLOCK_THREADS
-          #endif
-          goto __pyx_L1_error;
-        }
-        __pyx_L6:;
+        __pyx_L10:;
       }
   }
 
-  /* "parallel_matmul.pyx":73
+  /* "parallel_matmul.pyx":84
  *                     C[i, j] += A[i, k] * B[k, j]
  * 
  *     return C             # <<<<<<<<<<<<<<
@@ -5448,7 +5401,7 @@ static PyObject *__pyx_pf_15parallel_matmul_2matmul_parallel(CYTHON_UNUSED PyObj
   __pyx_r = ((PyObject *)__pyx_v_C);
   goto __pyx_L0;
 
-  /* "parallel_matmul.pyx":42
+  /* "parallel_matmul.pyx":50
  *     return C
  * 
  * def matmul_parallel(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B, int num_threads=0):             # <<<<<<<<<<<<<<
@@ -5485,7 +5438,7 @@ static PyObject *__pyx_pf_15parallel_matmul_2matmul_parallel(CYTHON_UNUSED PyObj
   return __pyx_r;
 }
 
-/* "parallel_matmul.pyx":75
+/* "parallel_matmul.pyx":86
  *     return C
  * 
  * def matmul_parallel_optimized(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B, int num_threads=0):             # <<<<<<<<<<<<<<
@@ -5553,7 +5506,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 75, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 86, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -5561,21 +5514,21 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 75, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 86, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("matmul_parallel_optimized", 0, 2, 3, 1); __PYX_ERR(0, 75, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("matmul_parallel_optimized", 0, 2, 3, 1); __PYX_ERR(0, 86, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_num_threads);
           if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 75, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 86, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "matmul_parallel_optimized") < 0)) __PYX_ERR(0, 75, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "matmul_parallel_optimized") < 0)) __PYX_ERR(0, 86, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -5590,14 +5543,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     __pyx_v_A = ((PyArrayObject *)values[0]);
     __pyx_v_B = ((PyArrayObject *)values[1]);
     if (values[2]) {
-      __pyx_v_num_threads = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 75, __pyx_L3_error)
+      __pyx_v_num_threads = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 86, __pyx_L3_error)
     } else {
       __pyx_v_num_threads = ((int)((int)0));
     }
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("matmul_parallel_optimized", 0, 2, 3, __pyx_nargs); __PYX_ERR(0, 75, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("matmul_parallel_optimized", 0, 2, 3, __pyx_nargs); __PYX_ERR(0, 86, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -5611,8 +5564,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_A), __pyx_ptype_5numpy_ndarray, 1, "A", 0))) __PYX_ERR(0, 75, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_B), __pyx_ptype_5numpy_ndarray, 1, "B", 0))) __PYX_ERR(0, 75, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_A), __pyx_ptype_5numpy_ndarray, 1, "A", 0))) __PYX_ERR(0, 86, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_B), __pyx_ptype_5numpy_ndarray, 1, "B", 0))) __PYX_ERR(0, 86, __pyx_L1_error)
   __pyx_r = __pyx_pf_15parallel_matmul_4matmul_parallel_optimized(__pyx_self, __pyx_v_A, __pyx_v_B, __pyx_v_num_threads);
 
   /* function exit code */
@@ -5665,17 +5618,16 @@ static PyObject *__pyx_pf_15parallel_matmul_4matmul_parallel_optimized(CYTHON_UN
   int __pyx_t_14;
   int __pyx_t_15;
   int __pyx_t_16;
-  int __pyx_t_17;
+  Py_ssize_t __pyx_t_17;
   Py_ssize_t __pyx_t_18;
-  Py_ssize_t __pyx_t_19;
+  int __pyx_t_19;
   int __pyx_t_20;
   int __pyx_t_21;
   int __pyx_t_22;
-  int __pyx_t_23;
+  Py_ssize_t __pyx_t_23;
   Py_ssize_t __pyx_t_24;
   Py_ssize_t __pyx_t_25;
   Py_ssize_t __pyx_t_26;
-  Py_ssize_t __pyx_t_27;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -5698,95 +5650,95 @@ static PyObject *__pyx_pf_15parallel_matmul_4matmul_parallel_optimized(CYTHON_UN
   __pyx_pybuffernd_B.rcbuffer = &__pyx_pybuffer_B;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_A.rcbuffer->pybuffer, (PyObject*)__pyx_v_A, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 75, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_A.rcbuffer->pybuffer, (PyObject*)__pyx_v_A, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 86, __pyx_L1_error)
   }
   __pyx_pybuffernd_A.diminfo[0].strides = __pyx_pybuffernd_A.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_A.diminfo[0].shape = __pyx_pybuffernd_A.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_A.diminfo[1].strides = __pyx_pybuffernd_A.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_A.diminfo[1].shape = __pyx_pybuffernd_A.rcbuffer->pybuffer.shape[1];
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_B.rcbuffer->pybuffer, (PyObject*)__pyx_v_B, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 75, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_B.rcbuffer->pybuffer, (PyObject*)__pyx_v_B, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 86, __pyx_L1_error)
   }
   __pyx_pybuffernd_B.diminfo[0].strides = __pyx_pybuffernd_B.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_B.diminfo[0].shape = __pyx_pybuffernd_B.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_B.diminfo[1].strides = __pyx_pybuffernd_B.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_B.diminfo[1].shape = __pyx_pybuffernd_B.rcbuffer->pybuffer.shape[1];
 
-  /* "parallel_matmul.pyx":90
+  /* "parallel_matmul.pyx":101
  *     """
  *     cdef:
  *         int m = A.shape[0]             # <<<<<<<<<<<<<<
  *         int n = A.shape[1]
  *         int p = B.shape[1]
  */
-  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_A)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 90, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_A)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 101, __pyx_L1_error)
   __pyx_v_m = (__pyx_t_1[0]);
 
-  /* "parallel_matmul.pyx":91
+  /* "parallel_matmul.pyx":102
  *     cdef:
  *         int m = A.shape[0]
  *         int n = A.shape[1]             # <<<<<<<<<<<<<<
  *         int p = B.shape[1]
  *         np.ndarray[double, ndim=2] C = np.zeros((m, p), dtype=np.float64)
  */
-  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_A)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 91, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_A)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 102, __pyx_L1_error)
   __pyx_v_n = (__pyx_t_1[1]);
 
-  /* "parallel_matmul.pyx":92
+  /* "parallel_matmul.pyx":103
  *         int m = A.shape[0]
  *         int n = A.shape[1]
  *         int p = B.shape[1]             # <<<<<<<<<<<<<<
  *         np.ndarray[double, ndim=2] C = np.zeros((m, p), dtype=np.float64)
- *         np.ndarray[double, ndim=2] B_T = np.transpose(B)  # B
+ *         np.ndarray[double, ndim=2] B_T = np.ascontiguousarray(np.transpose(B))  # B ,
  */
-  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_B)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 92, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_B)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 103, __pyx_L1_error)
   __pyx_v_p = (__pyx_t_1[1]);
 
-  /* "parallel_matmul.pyx":93
+  /* "parallel_matmul.pyx":104
  *         int n = A.shape[1]
  *         int p = B.shape[1]
  *         np.ndarray[double, ndim=2] C = np.zeros((m, p), dtype=np.float64)             # <<<<<<<<<<<<<<
- *         np.ndarray[double, ndim=2] B_T = np.transpose(B)  # B
+ *         np.ndarray[double, ndim=2] B_T = np.ascontiguousarray(np.transpose(B))  # B ,
  *         int i, j, k
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_zeros); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_zeros); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_m); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_m); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_p); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_p); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2)) __PYX_ERR(0, 93, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2)) __PYX_ERR(0, 104, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_4);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_4)) __PYX_ERR(0, 93, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_4)) __PYX_ERR(0, 104, __pyx_L1_error);
   __pyx_t_2 = 0;
   __pyx_t_4 = 0;
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_5);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5)) __PYX_ERR(0, 93, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5)) __PYX_ERR(0, 104, __pyx_L1_error);
   __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 93, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 104, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (!(likely(((__pyx_t_6) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_6, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 93, __pyx_L1_error)
+  if (!(likely(((__pyx_t_6) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_6, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 104, __pyx_L1_error)
   __pyx_t_7 = ((PyArrayObject *)__pyx_t_6);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_C.rcbuffer->pybuffer, (PyObject*)__pyx_t_7, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES| PyBUF_WRITABLE, 2, 0, __pyx_stack) == -1)) {
       __pyx_v_C = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_C.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 93, __pyx_L1_error)
+      __PYX_ERR(0, 104, __pyx_L1_error)
     } else {__pyx_pybuffernd_C.diminfo[0].strides = __pyx_pybuffernd_C.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_C.diminfo[0].shape = __pyx_pybuffernd_C.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_C.diminfo[1].strides = __pyx_pybuffernd_C.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_C.diminfo[1].shape = __pyx_pybuffernd_C.rcbuffer->pybuffer.shape[1];
     }
   }
@@ -5794,26 +5746,53 @@ static PyObject *__pyx_pf_15parallel_matmul_4matmul_parallel_optimized(CYTHON_UN
   __pyx_v_C = ((PyArrayObject *)__pyx_t_6);
   __pyx_t_6 = 0;
 
-  /* "parallel_matmul.pyx":94
+  /* "parallel_matmul.pyx":105
  *         int p = B.shape[1]
  *         np.ndarray[double, ndim=2] C = np.zeros((m, p), dtype=np.float64)
- *         np.ndarray[double, ndim=2] B_T = np.transpose(B)  # B             # <<<<<<<<<<<<<<
+ *         np.ndarray[double, ndim=2] B_T = np.ascontiguousarray(np.transpose(B))  # B ,             # <<<<<<<<<<<<<<
  *         int i, j, k
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_transpose); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_ascontiguousarray); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_np); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 105, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_transpose); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 105, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = NULL;
+  __pyx_t_8 = 0;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+      __pyx_t_8 = 1;
+    }
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_3, ((PyObject *)__pyx_v_B)};
+    __pyx_t_5 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
+    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 105, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  }
+  __pyx_t_2 = NULL;
   __pyx_t_8 = 0;
   #if CYTHON_UNPACK_METHODS
   if (unlikely(PyMethod_Check(__pyx_t_4))) {
-    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_4);
-    if (likely(__pyx_t_5)) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
+    if (likely(__pyx_t_2)) {
       PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(__pyx_t_2);
       __Pyx_INCREF(function);
       __Pyx_DECREF_SET(__pyx_t_4, function);
       __pyx_t_8 = 1;
@@ -5821,20 +5800,21 @@ static PyObject *__pyx_pf_15parallel_matmul_4matmul_parallel_optimized(CYTHON_UN
   }
   #endif
   {
-    PyObject *__pyx_callargs[2] = {__pyx_t_5, ((PyObject *)__pyx_v_B)};
+    PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_t_5};
     __pyx_t_6 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
-    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 94, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 105, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
-  if (!(likely(((__pyx_t_6) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_6, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 94, __pyx_L1_error)
+  if (!(likely(((__pyx_t_6) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_6, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 105, __pyx_L1_error)
   __pyx_t_9 = ((PyArrayObject *)__pyx_t_6);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_B_T.rcbuffer->pybuffer, (PyObject*)__pyx_t_9, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) {
       __pyx_v_B_T = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_B_T.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(0, 94, __pyx_L1_error)
+      __PYX_ERR(0, 105, __pyx_L1_error)
     } else {__pyx_pybuffernd_B_T.diminfo[0].strides = __pyx_pybuffernd_B_T.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_B_T.diminfo[0].shape = __pyx_pybuffernd_B_T.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_B_T.diminfo[1].strides = __pyx_pybuffernd_B_T.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_B_T.diminfo[1].shape = __pyx_pybuffernd_B_T.rcbuffer->pybuffer.shape[1];
     }
   }
@@ -5842,7 +5822,7 @@ static PyObject *__pyx_pf_15parallel_matmul_4matmul_parallel_optimized(CYTHON_UN
   __pyx_v_B_T = ((PyArrayObject *)__pyx_t_6);
   __pyx_t_6 = 0;
 
-  /* "parallel_matmul.pyx":97
+  /* "parallel_matmul.pyx":108
  *         int i, j, k
  * 
  *     if num_threads > 0:             # <<<<<<<<<<<<<<
@@ -5852,16 +5832,16 @@ static PyObject *__pyx_pf_15parallel_matmul_4matmul_parallel_optimized(CYTHON_UN
   __pyx_t_10 = (__pyx_v_num_threads > 0);
   if (__pyx_t_10) {
 
-    /* "parallel_matmul.pyx":98
+    /* "parallel_matmul.pyx":109
  * 
  *     if num_threads > 0:
  *         omp_set_num_threads(num_threads)             # <<<<<<<<<<<<<<
  * 
- *     # B
+ *     #
  */
     omp_set_num_threads(__pyx_v_num_threads);
 
-    /* "parallel_matmul.pyx":97
+    /* "parallel_matmul.pyx":108
  *         int i, j, k
  * 
  *     if num_threads > 0:             # <<<<<<<<<<<<<<
@@ -5870,11 +5850,48 @@ static PyObject *__pyx_pf_15parallel_matmul_4matmul_parallel_optimized(CYTHON_UN
  */
   }
 
-  /* "parallel_matmul.pyx":102
- *     # B
+  /* "parallel_matmul.pyx":112
+ * 
  *     #
+ *     for i in range(m):             # <<<<<<<<<<<<<<
+ *         for j in range(p):
+ *             C[i, j] = 0.0
+ */
+  __pyx_t_11 = __pyx_v_m;
+  __pyx_t_12 = __pyx_t_11;
+  for (__pyx_t_13 = 0; __pyx_t_13 < __pyx_t_12; __pyx_t_13+=1) {
+    __pyx_v_i = __pyx_t_13;
+
+    /* "parallel_matmul.pyx":113
+ *     #
+ *     for i in range(m):
+ *         for j in range(p):             # <<<<<<<<<<<<<<
+ *             C[i, j] = 0.0
+ * 
+ */
+    __pyx_t_14 = __pyx_v_p;
+    __pyx_t_15 = __pyx_t_14;
+    for (__pyx_t_16 = 0; __pyx_t_16 < __pyx_t_15; __pyx_t_16+=1) {
+      __pyx_v_j = __pyx_t_16;
+
+      /* "parallel_matmul.pyx":114
+ *     for i in range(m):
+ *         for j in range(p):
+ *             C[i, j] = 0.0             # <<<<<<<<<<<<<<
+ * 
+ *     #   +   (B   )
+ */
+      __pyx_t_17 = __pyx_v_i;
+      __pyx_t_18 = __pyx_v_j;
+      *__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_C.rcbuffer->pybuffer.buf, __pyx_t_17, __pyx_pybuffernd_C.diminfo[0].strides, __pyx_t_18, __pyx_pybuffernd_C.diminfo[1].strides) = 0.0;
+    }
+  }
+
+  /* "parallel_matmul.pyx":117
+ * 
+ *     #   +   (B   )
  *     with nogil:             # <<<<<<<<<<<<<<
- *         for i in prange(m, schedule='dynamic', chunksize=1):
+ *         for i in prange(m, schedule='guided', chunksize=4):
  *             for j in range(p):
  */
   {
@@ -5886,23 +5903,16 @@ static PyObject *__pyx_pf_15parallel_matmul_4matmul_parallel_optimized(CYTHON_UN
       #endif
       /*try:*/ {
 
-        /* "parallel_matmul.pyx":103
- *     #
+        /* "parallel_matmul.pyx":118
+ *     #   +   (B   )
  *     with nogil:
- *         for i in prange(m, schedule='dynamic', chunksize=1):             # <<<<<<<<<<<<<<
+ *         for i in prange(m, schedule='guided', chunksize=4):             # <<<<<<<<<<<<<<
  *             for j in range(p):
- *                 # C[i, j]
+ *                 for k in range(n):
  */
         __pyx_t_11 = __pyx_v_m;
         {
-            int __pyx_parallel_temp0 = ((int)0xbad0bad0);
-            int __pyx_parallel_temp1 = ((int)0xbad0bad0);
-            int __pyx_parallel_temp2 = ((int)0xbad0bad0);
-            const char *__pyx_parallel_filename = NULL; int __pyx_parallel_lineno = 0, __pyx_parallel_clineno = 0;
-            PyObject *__pyx_parallel_exc_type = NULL, *__pyx_parallel_exc_value = NULL, *__pyx_parallel_exc_tb = NULL;
-            int __pyx_parallel_why;
-            __pyx_parallel_why = 0;
-            __pyx_t_14 = 1;
+            __pyx_t_14 = 4;
             #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
                 #undef likely
                 #undef unlikely
@@ -5913,67 +5923,36 @@ static PyObject *__pyx_pf_15parallel_matmul_4matmul_parallel_optimized(CYTHON_UN
             if (__pyx_t_13 > 0)
             {
                 #ifdef _OPENMP
-                #pragma omp parallel private(__pyx_t_15, __pyx_t_16, __pyx_t_17, __pyx_t_18, __pyx_t_19, __pyx_t_20, __pyx_t_21, __pyx_t_22, __pyx_t_23, __pyx_t_24, __pyx_t_25, __pyx_t_26, __pyx_t_27) private(__pyx_filename, __pyx_lineno, __pyx_clineno) shared(__pyx_parallel_why, __pyx_parallel_exc_type, __pyx_parallel_exc_value, __pyx_parallel_exc_tb)
+                #pragma omp parallel private(__pyx_t_15, __pyx_t_16, __pyx_t_17, __pyx_t_18, __pyx_t_19, __pyx_t_20, __pyx_t_21, __pyx_t_22, __pyx_t_23, __pyx_t_24, __pyx_t_25, __pyx_t_26)
                 #endif /* _OPENMP */
                 {
                     #ifdef _OPENMP
-                    #ifdef WITH_THREAD
-                    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-                    #endif
-                    Py_BEGIN_ALLOW_THREADS
-                    #endif /* _OPENMP */
-                    #ifdef _OPENMP
-                    #pragma omp for firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) lastprivate(__pyx_v_j) lastprivate(__pyx_v_k) schedule(dynamic, __pyx_t_14)
+                    #pragma omp for firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) lastprivate(__pyx_v_j) lastprivate(__pyx_v_k) schedule(guided, __pyx_t_14)
                     #endif /* _OPENMP */
                     for (__pyx_t_12 = 0; __pyx_t_12 < __pyx_t_13; __pyx_t_12++){
-                        if (__pyx_parallel_why < 2)
                         {
                             __pyx_v_i = (int)(0 + 1 * __pyx_t_12);
                             /* Initialize private variables to invalid values */
                             __pyx_v_j = ((int)0xbad0bad0);
                             __pyx_v_k = ((int)0xbad0bad0);
 
-                            /* "parallel_matmul.pyx":104
+                            /* "parallel_matmul.pyx":119
  *     with nogil:
- *         for i in prange(m, schedule='dynamic', chunksize=1):
+ *         for i in prange(m, schedule='guided', chunksize=4):
  *             for j in range(p):             # <<<<<<<<<<<<<<
- *                 # C[i, j]
- *                 C[i, j] = 0.0  #
+ *                 for k in range(n):
+ *                     C[i, j] += A[i, k] * B_T[j, k]
  */
                             __pyx_t_15 = __pyx_v_p;
                             __pyx_t_16 = __pyx_t_15;
-                            for (__pyx_t_17 = 0; __pyx_t_17 < __pyx_t_16; __pyx_t_17+=1) {
-                              __pyx_v_j = __pyx_t_17;
+                            for (__pyx_t_19 = 0; __pyx_t_19 < __pyx_t_16; __pyx_t_19+=1) {
+                              __pyx_v_j = __pyx_t_19;
 
-                              /* "parallel_matmul.pyx":106
+                              /* "parallel_matmul.pyx":120
+ *         for i in prange(m, schedule='guided', chunksize=4):
  *             for j in range(p):
- *                 # C[i, j]
- *                 C[i, j] = 0.0  #             # <<<<<<<<<<<<<<
- *                 for k in range(n):
- *                     C[i, j] += A[i, k] * B_T[j, k]  # B_T[j, k] = B[k, j]
- */
-                              __pyx_t_18 = __pyx_v_i;
-                              __pyx_t_19 = __pyx_v_j;
-                              __pyx_t_20 = -1;
-                              if (__pyx_t_18 < 0) {
-                                __pyx_t_18 += __pyx_pybuffernd_C.diminfo[0].shape;
-                                if (unlikely(__pyx_t_18 < 0)) __pyx_t_20 = 0;
-                              } else if (unlikely(__pyx_t_18 >= __pyx_pybuffernd_C.diminfo[0].shape)) __pyx_t_20 = 0;
-                              if (__pyx_t_19 < 0) {
-                                __pyx_t_19 += __pyx_pybuffernd_C.diminfo[1].shape;
-                                if (unlikely(__pyx_t_19 < 0)) __pyx_t_20 = 1;
-                              } else if (unlikely(__pyx_t_19 >= __pyx_pybuffernd_C.diminfo[1].shape)) __pyx_t_20 = 1;
-                              if (unlikely(__pyx_t_20 != -1)) {
-                                __Pyx_RaiseBufferIndexErrorNogil(__pyx_t_20);
-                                __PYX_ERR(0, 106, __pyx_L9_error)
-                              }
-                              *__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_C.rcbuffer->pybuffer.buf, __pyx_t_18, __pyx_pybuffernd_C.diminfo[0].strides, __pyx_t_19, __pyx_pybuffernd_C.diminfo[1].strides) = 0.0;
-
-                              /* "parallel_matmul.pyx":107
- *                 # C[i, j]
- *                 C[i, j] = 0.0  #
  *                 for k in range(n):             # <<<<<<<<<<<<<<
- *                     C[i, j] += A[i, k] * B_T[j, k]  # B_T[j, k] = B[k, j]
+ *                     C[i, j] += A[i, k] * B_T[j, k]
  * 
  */
                               __pyx_t_20 = __pyx_v_n;
@@ -5981,136 +5960,25 @@ static PyObject *__pyx_pf_15parallel_matmul_4matmul_parallel_optimized(CYTHON_UN
                               for (__pyx_t_22 = 0; __pyx_t_22 < __pyx_t_21; __pyx_t_22+=1) {
                                 __pyx_v_k = __pyx_t_22;
 
-                                /* "parallel_matmul.pyx":108
- *                 C[i, j] = 0.0  #
+                                /* "parallel_matmul.pyx":121
+ *             for j in range(p):
  *                 for k in range(n):
- *                     C[i, j] += A[i, k] * B_T[j, k]  # B_T[j, k] = B[k, j]             # <<<<<<<<<<<<<<
+ *                     C[i, j] += A[i, k] * B_T[j, k]             # <<<<<<<<<<<<<<
  * 
  *     return C
  */
-                                __pyx_t_19 = __pyx_v_i;
-                                __pyx_t_18 = __pyx_v_k;
-                                __pyx_t_23 = -1;
-                                if (__pyx_t_19 < 0) {
-                                  __pyx_t_19 += __pyx_pybuffernd_A.diminfo[0].shape;
-                                  if (unlikely(__pyx_t_19 < 0)) __pyx_t_23 = 0;
-                                } else if (unlikely(__pyx_t_19 >= __pyx_pybuffernd_A.diminfo[0].shape)) __pyx_t_23 = 0;
-                                if (__pyx_t_18 < 0) {
-                                  __pyx_t_18 += __pyx_pybuffernd_A.diminfo[1].shape;
-                                  if (unlikely(__pyx_t_18 < 0)) __pyx_t_23 = 1;
-                                } else if (unlikely(__pyx_t_18 >= __pyx_pybuffernd_A.diminfo[1].shape)) __pyx_t_23 = 1;
-                                if (unlikely(__pyx_t_23 != -1)) {
-                                  __Pyx_RaiseBufferIndexErrorNogil(__pyx_t_23);
-                                  __PYX_ERR(0, 108, __pyx_L9_error)
-                                }
-                                __pyx_t_24 = __pyx_v_j;
-                                __pyx_t_25 = __pyx_v_k;
-                                __pyx_t_23 = -1;
-                                if (__pyx_t_24 < 0) {
-                                  __pyx_t_24 += __pyx_pybuffernd_B_T.diminfo[0].shape;
-                                  if (unlikely(__pyx_t_24 < 0)) __pyx_t_23 = 0;
-                                } else if (unlikely(__pyx_t_24 >= __pyx_pybuffernd_B_T.diminfo[0].shape)) __pyx_t_23 = 0;
-                                if (__pyx_t_25 < 0) {
-                                  __pyx_t_25 += __pyx_pybuffernd_B_T.diminfo[1].shape;
-                                  if (unlikely(__pyx_t_25 < 0)) __pyx_t_23 = 1;
-                                } else if (unlikely(__pyx_t_25 >= __pyx_pybuffernd_B_T.diminfo[1].shape)) __pyx_t_23 = 1;
-                                if (unlikely(__pyx_t_23 != -1)) {
-                                  __Pyx_RaiseBufferIndexErrorNogil(__pyx_t_23);
-                                  __PYX_ERR(0, 108, __pyx_L9_error)
-                                }
-                                __pyx_t_26 = __pyx_v_i;
-                                __pyx_t_27 = __pyx_v_j;
-                                __pyx_t_23 = -1;
-                                if (__pyx_t_26 < 0) {
-                                  __pyx_t_26 += __pyx_pybuffernd_C.diminfo[0].shape;
-                                  if (unlikely(__pyx_t_26 < 0)) __pyx_t_23 = 0;
-                                } else if (unlikely(__pyx_t_26 >= __pyx_pybuffernd_C.diminfo[0].shape)) __pyx_t_23 = 0;
-                                if (__pyx_t_27 < 0) {
-                                  __pyx_t_27 += __pyx_pybuffernd_C.diminfo[1].shape;
-                                  if (unlikely(__pyx_t_27 < 0)) __pyx_t_23 = 1;
-                                } else if (unlikely(__pyx_t_27 >= __pyx_pybuffernd_C.diminfo[1].shape)) __pyx_t_23 = 1;
-                                if (unlikely(__pyx_t_23 != -1)) {
-                                  __Pyx_RaiseBufferIndexErrorNogil(__pyx_t_23);
-                                  __PYX_ERR(0, 108, __pyx_L9_error)
-                                }
-                                *__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_C.rcbuffer->pybuffer.buf, __pyx_t_26, __pyx_pybuffernd_C.diminfo[0].strides, __pyx_t_27, __pyx_pybuffernd_C.diminfo[1].strides) += ((*__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_A.rcbuffer->pybuffer.buf, __pyx_t_19, __pyx_pybuffernd_A.diminfo[0].strides, __pyx_t_18, __pyx_pybuffernd_A.diminfo[1].strides)) * (*__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_B_T.rcbuffer->pybuffer.buf, __pyx_t_24, __pyx_pybuffernd_B_T.diminfo[0].strides, __pyx_t_25, __pyx_pybuffernd_B_T.diminfo[1].strides)));
+                                __pyx_t_18 = __pyx_v_i;
+                                __pyx_t_17 = __pyx_v_k;
+                                __pyx_t_23 = __pyx_v_j;
+                                __pyx_t_24 = __pyx_v_k;
+                                __pyx_t_25 = __pyx_v_i;
+                                __pyx_t_26 = __pyx_v_j;
+                                *__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_C.rcbuffer->pybuffer.buf, __pyx_t_25, __pyx_pybuffernd_C.diminfo[0].strides, __pyx_t_26, __pyx_pybuffernd_C.diminfo[1].strides) += ((*__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_A.rcbuffer->pybuffer.buf, __pyx_t_18, __pyx_pybuffernd_A.diminfo[0].strides, __pyx_t_17, __pyx_pybuffernd_A.diminfo[1].strides)) * (*__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_B_T.rcbuffer->pybuffer.buf, __pyx_t_23, __pyx_pybuffernd_B_T.diminfo[0].strides, __pyx_t_24, __pyx_pybuffernd_B_T.diminfo[1].strides)));
                               }
                             }
-                            goto __pyx_L16;
-                            __pyx_L9_error:;
-                            {
-                                #ifdef WITH_THREAD
-                                PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-                                #endif
-                                #ifdef _OPENMP
-                                #pragma omp flush(__pyx_parallel_exc_type)
-                                #endif /* _OPENMP */
-                                if (!__pyx_parallel_exc_type) {
-                                  __Pyx_ErrFetchWithState(&__pyx_parallel_exc_type, &__pyx_parallel_exc_value, &__pyx_parallel_exc_tb);
-                                  __pyx_parallel_filename = __pyx_filename; __pyx_parallel_lineno = __pyx_lineno; __pyx_parallel_clineno = __pyx_clineno;
-                                  __Pyx_GOTREF(__pyx_parallel_exc_type);
-                                }
-                                #ifdef WITH_THREAD
-                                __Pyx_PyGILState_Release(__pyx_gilstate_save);
-                                #endif
-                            }
-                            __pyx_parallel_why = 4;
-                            goto __pyx_L15;
-                            __pyx_L15:;
-                            #ifdef _OPENMP
-                            #pragma omp critical(__pyx_parallel_lastprivates1)
-                            #endif /* _OPENMP */
-                            {
-                                __pyx_parallel_temp0 = __pyx_v_i;
-                                __pyx_parallel_temp1 = __pyx_v_j;
-                                __pyx_parallel_temp2 = __pyx_v_k;
-                            }
-                            __pyx_L16:;
-                            #ifdef _OPENMP
-                            #pragma omp flush(__pyx_parallel_why)
-                            #endif /* _OPENMP */
                         }
                     }
-                    #ifdef _OPENMP
-                    Py_END_ALLOW_THREADS
-                    #else
-{
-#ifdef WITH_THREAD
-                    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-                    #endif
-                    #endif /* _OPENMP */
-                    /* Clean up any temporaries */
-                    #ifdef WITH_THREAD
-                    __Pyx_PyGILState_Release(__pyx_gilstate_save);
-                    #endif
-                    #ifndef _OPENMP
-}
-#endif /* _OPENMP */
                 }
-            }
-            if (__pyx_parallel_exc_type) {
-              /* This may have been overridden by a continue, break or return in another thread. Prefer the error. */
-              __pyx_parallel_why = 4;
-            }
-            if (__pyx_parallel_why) {
-              __pyx_v_i = __pyx_parallel_temp0;
-              __pyx_v_j = __pyx_parallel_temp1;
-              __pyx_v_k = __pyx_parallel_temp2;
-              switch (__pyx_parallel_why) {
-                    case 4:
-                {
-                    #ifdef WITH_THREAD
-                    PyGILState_STATE __pyx_gilstate_save = __Pyx_PyGILState_Ensure();
-                    #endif
-                    __Pyx_GIVEREF(__pyx_parallel_exc_type);
-                    __Pyx_ErrRestoreWithState(__pyx_parallel_exc_type, __pyx_parallel_exc_value, __pyx_parallel_exc_tb);
-                    __pyx_filename = __pyx_parallel_filename; __pyx_lineno = __pyx_parallel_lineno; __pyx_clineno = __pyx_parallel_clineno;
-                    #ifdef WITH_THREAD
-                    __Pyx_PyGILState_Release(__pyx_gilstate_save);
-                    #endif
-                }
-                goto __pyx_L5_error;
-              }
             }
         }
         #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
@@ -6121,11 +5989,11 @@ static PyObject *__pyx_pf_15parallel_matmul_4matmul_parallel_optimized(CYTHON_UN
         #endif
       }
 
-      /* "parallel_matmul.pyx":102
- *     # B
- *     #
+      /* "parallel_matmul.pyx":117
+ * 
+ *     #   +   (B   )
  *     with nogil:             # <<<<<<<<<<<<<<
- *         for i in prange(m, schedule='dynamic', chunksize=1):
+ *         for i in prange(m, schedule='guided', chunksize=4):
  *             for j in range(p):
  */
       /*finally:*/ {
@@ -6134,32 +6002,25 @@ static PyObject *__pyx_pf_15parallel_matmul_4matmul_parallel_optimized(CYTHON_UN
           __Pyx_FastGIL_Forget();
           Py_BLOCK_THREADS
           #endif
-          goto __pyx_L6;
+          goto __pyx_L10;
         }
-        __pyx_L5_error: {
-          #ifdef WITH_THREAD
-          __Pyx_FastGIL_Forget();
-          Py_BLOCK_THREADS
-          #endif
-          goto __pyx_L1_error;
-        }
-        __pyx_L6:;
+        __pyx_L10:;
       }
   }
 
-  /* "parallel_matmul.pyx":110
- *                     C[i, j] += A[i, k] * B_T[j, k]  # B_T[j, k] = B[k, j]
+  /* "parallel_matmul.pyx":123
+ *                     C[i, j] += A[i, k] * B_T[j, k]
  * 
  *     return C             # <<<<<<<<<<<<<<
  * 
- * def benchmark_matmul(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B, int num_threads=0):
+ * def matmul_parallel_block(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B, int num_threads=0):
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF((PyObject *)__pyx_v_C);
   __pyx_r = ((PyObject *)__pyx_v_C);
   goto __pyx_L0;
 
-  /* "parallel_matmul.pyx":75
+  /* "parallel_matmul.pyx":86
  *     return C
  * 
  * def matmul_parallel_optimized(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B, int num_threads=0):             # <<<<<<<<<<<<<<
@@ -6199,7 +6060,549 @@ static PyObject *__pyx_pf_15parallel_matmul_4matmul_parallel_optimized(CYTHON_UN
   return __pyx_r;
 }
 
-/* "parallel_matmul.pyx":112
+/* "parallel_matmul.pyx":125
+ *     return C
+ * 
+ * def matmul_parallel_block(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B, int num_threads=0):             # <<<<<<<<<<<<<<
+ *     """
+ *           .
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_15parallel_matmul_7matmul_parallel_block(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_15parallel_matmul_6matmul_parallel_block, "\n    \353\221\220 \355\226\211\353\240\254\354\235\230 \352\263\261\354\235\204 \353\270\224\353\241\235 \352\270\260\353\260\230\354\234\274\353\241\234 \353\263\221\353\240\254 \352\263\204\354\202\260\355\225\251\353\213\210\353\213\244.\n    \n    \354\272\220\354\213\234 \354\247\200\354\227\255\354\204\261\354\235\204 \354\265\234\353\214\200\355\231\224\355\225\230\352\270\260 \354\234\204\355\225\264 \353\270\224\353\241\235 \353\247\244\355\212\270\353\246\255\354\212\244 \354\240\221\352\267\274\353\262\225\354\235\204 \354\202\254\354\232\251\355\225\251\353\213\210\353\213\244.\n    \n    Args:\n        A: \354\262\253 \353\262\210\354\247\270 \355\226\211\353\240\254 (m x n)\n        B: \353\221\220 \353\262\210\354\247\270 \355\226\211\353\240\254 (n x p)\n        num_threads: \354\202\254\354\232\251\355\225\240 \354\212\244\353\240\210\353\223\234 \354\210\230 (0\354\235\264\353\251\264 \354\213\234\354\212\244\355\205\234 \352\270\260\353\263\270\352\260\222 \354\202\254\354\232\251)\n    \n    Returns:\n        \355\226\211\353\240\254 \352\263\261 C = A * B (m x p)\n    ");
+static PyMethodDef __pyx_mdef_15parallel_matmul_7matmul_parallel_block = {"matmul_parallel_block", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_15parallel_matmul_7matmul_parallel_block, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_15parallel_matmul_6matmul_parallel_block};
+static PyObject *__pyx_pw_15parallel_matmul_7matmul_parallel_block(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  PyArrayObject *__pyx_v_A = 0;
+  PyArrayObject *__pyx_v_B = 0;
+  int __pyx_v_num_threads;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[3] = {0,0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("matmul_parallel_block (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_MACROS
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_A,&__pyx_n_s_B,&__pyx_n_s_num_threads,0};
+    if (__pyx_kwds) {
+      Py_ssize_t kw_args;
+      switch (__pyx_nargs) {
+        case  3: values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
+      switch (__pyx_nargs) {
+        case  0:
+        if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_A)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 125, __pyx_L3_error)
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_B)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 125, __pyx_L3_error)
+        else {
+          __Pyx_RaiseArgtupleInvalid("matmul_parallel_block", 0, 2, 3, 1); __PYX_ERR(0, 125, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (kw_args > 0) {
+          PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_num_threads);
+          if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 125, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        const Py_ssize_t kwd_pos_args = __pyx_nargs;
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "matmul_parallel_block") < 0)) __PYX_ERR(0, 125, __pyx_L3_error)
+      }
+    } else {
+      switch (__pyx_nargs) {
+        case  3: values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
+        values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+        break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+    }
+    __pyx_v_A = ((PyArrayObject *)values[0]);
+    __pyx_v_B = ((PyArrayObject *)values[1]);
+    if (values[2]) {
+      __pyx_v_num_threads = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 125, __pyx_L3_error)
+    } else {
+      __pyx_v_num_threads = ((int)((int)0));
+    }
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("matmul_parallel_block", 0, 2, 3, __pyx_nargs); __PYX_ERR(0, 125, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_AddTraceback("parallel_matmul.matmul_parallel_block", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_A), __pyx_ptype_5numpy_ndarray, 1, "A", 0))) __PYX_ERR(0, 125, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_B), __pyx_ptype_5numpy_ndarray, 1, "B", 0))) __PYX_ERR(0, 125, __pyx_L1_error)
+  __pyx_r = __pyx_pf_15parallel_matmul_6matmul_parallel_block(__pyx_self, __pyx_v_A, __pyx_v_B, __pyx_v_num_threads);
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __pyx_r = NULL;
+  __pyx_L0:;
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_15parallel_matmul_6matmul_parallel_block(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_A, PyArrayObject *__pyx_v_B, int __pyx_v_num_threads) {
+  int __pyx_v_m;
+  int __pyx_v_n;
+  int __pyx_v_p;
+  PyArrayObject *__pyx_v_C = 0;
+  int __pyx_v_i;
+  int __pyx_v_j;
+  int __pyx_v_k;
+  CYTHON_UNUSED int __pyx_v_BLOCK_SIZE;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_A;
+  __Pyx_Buffer __pyx_pybuffer_A;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_B;
+  __Pyx_Buffer __pyx_pybuffer_B;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_C;
+  __Pyx_Buffer __pyx_pybuffer_C;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  npy_intp *__pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
+  PyArrayObject *__pyx_t_7 = NULL;
+  int __pyx_t_8;
+  int __pyx_t_9;
+  int __pyx_t_10;
+  int __pyx_t_11;
+  int __pyx_t_12;
+  int __pyx_t_13;
+  int __pyx_t_14;
+  Py_ssize_t __pyx_t_15;
+  Py_ssize_t __pyx_t_16;
+  int __pyx_t_17;
+  int __pyx_t_18;
+  int __pyx_t_19;
+  Py_ssize_t __pyx_t_20;
+  Py_ssize_t __pyx_t_21;
+  Py_ssize_t __pyx_t_22;
+  Py_ssize_t __pyx_t_23;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("matmul_parallel_block", 1);
+  __pyx_pybuffer_C.pybuffer.buf = NULL;
+  __pyx_pybuffer_C.refcount = 0;
+  __pyx_pybuffernd_C.data = NULL;
+  __pyx_pybuffernd_C.rcbuffer = &__pyx_pybuffer_C;
+  __pyx_pybuffer_A.pybuffer.buf = NULL;
+  __pyx_pybuffer_A.refcount = 0;
+  __pyx_pybuffernd_A.data = NULL;
+  __pyx_pybuffernd_A.rcbuffer = &__pyx_pybuffer_A;
+  __pyx_pybuffer_B.pybuffer.buf = NULL;
+  __pyx_pybuffer_B.refcount = 0;
+  __pyx_pybuffernd_B.data = NULL;
+  __pyx_pybuffernd_B.rcbuffer = &__pyx_pybuffer_B;
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_A.rcbuffer->pybuffer, (PyObject*)__pyx_v_A, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 125, __pyx_L1_error)
+  }
+  __pyx_pybuffernd_A.diminfo[0].strides = __pyx_pybuffernd_A.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_A.diminfo[0].shape = __pyx_pybuffernd_A.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_A.diminfo[1].strides = __pyx_pybuffernd_A.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_A.diminfo[1].shape = __pyx_pybuffernd_A.rcbuffer->pybuffer.shape[1];
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_B.rcbuffer->pybuffer, (PyObject*)__pyx_v_B, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 125, __pyx_L1_error)
+  }
+  __pyx_pybuffernd_B.diminfo[0].strides = __pyx_pybuffernd_B.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_B.diminfo[0].shape = __pyx_pybuffernd_B.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_B.diminfo[1].strides = __pyx_pybuffernd_B.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_B.diminfo[1].shape = __pyx_pybuffernd_B.rcbuffer->pybuffer.shape[1];
+
+  /* "parallel_matmul.pyx":140
+ *     """
+ *     cdef:
+ *         int m = A.shape[0]             # <<<<<<<<<<<<<<
+ *         int n = A.shape[1]
+ *         int p = B.shape[1]
+ */
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_A)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 140, __pyx_L1_error)
+  __pyx_v_m = (__pyx_t_1[0]);
+
+  /* "parallel_matmul.pyx":141
+ *     cdef:
+ *         int m = A.shape[0]
+ *         int n = A.shape[1]             # <<<<<<<<<<<<<<
+ *         int p = B.shape[1]
+ *         np.ndarray[double, ndim=2] C = np.zeros((m, p), dtype=np.float64)
+ */
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_A)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 141, __pyx_L1_error)
+  __pyx_v_n = (__pyx_t_1[1]);
+
+  /* "parallel_matmul.pyx":142
+ *         int m = A.shape[0]
+ *         int n = A.shape[1]
+ *         int p = B.shape[1]             # <<<<<<<<<<<<<<
+ *         np.ndarray[double, ndim=2] C = np.zeros((m, p), dtype=np.float64)
+ *         int i, j, k
+ */
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_B)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(0, 142, __pyx_L1_error)
+  __pyx_v_p = (__pyx_t_1[1]);
+
+  /* "parallel_matmul.pyx":143
+ *         int n = A.shape[1]
+ *         int p = B.shape[1]
+ *         np.ndarray[double, ndim=2] C = np.zeros((m, p), dtype=np.float64)             # <<<<<<<<<<<<<<
+ *         int i, j, k
+ *         #      (    )
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_zeros); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_m); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_p); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_GIVEREF(__pyx_t_2);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2)) __PYX_ERR(0, 143, __pyx_L1_error);
+  __Pyx_GIVEREF(__pyx_t_4);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_4)) __PYX_ERR(0, 143, __pyx_L1_error);
+  __pyx_t_2 = 0;
+  __pyx_t_4 = 0;
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_GIVEREF(__pyx_t_5);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5)) __PYX_ERR(0, 143, __pyx_L1_error);
+  __pyx_t_5 = 0;
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_float64); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, __pyx_t_6) < 0) __PYX_ERR(0, 143, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (!(likely(((__pyx_t_6) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_6, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(0, 143, __pyx_L1_error)
+  __pyx_t_7 = ((PyArrayObject *)__pyx_t_6);
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_C.rcbuffer->pybuffer, (PyObject*)__pyx_t_7, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES| PyBUF_WRITABLE, 2, 0, __pyx_stack) == -1)) {
+      __pyx_v_C = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_C.rcbuffer->pybuffer.buf = NULL;
+      __PYX_ERR(0, 143, __pyx_L1_error)
+    } else {__pyx_pybuffernd_C.diminfo[0].strides = __pyx_pybuffernd_C.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_C.diminfo[0].shape = __pyx_pybuffernd_C.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_C.diminfo[1].strides = __pyx_pybuffernd_C.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_C.diminfo[1].shape = __pyx_pybuffernd_C.rcbuffer->pybuffer.shape[1];
+    }
+  }
+  __pyx_t_7 = 0;
+  __pyx_v_C = ((PyArrayObject *)__pyx_t_6);
+  __pyx_t_6 = 0;
+
+  /* "parallel_matmul.pyx":146
+ *         int i, j, k
+ *         #      (    )
+ *         int BLOCK_SIZE = 64             # <<<<<<<<<<<<<<
+ * 
+ *     if num_threads > 0:
+ */
+  __pyx_v_BLOCK_SIZE = 64;
+
+  /* "parallel_matmul.pyx":148
+ *         int BLOCK_SIZE = 64
+ * 
+ *     if num_threads > 0:             # <<<<<<<<<<<<<<
+ *         omp_set_num_threads(num_threads)
+ * 
+ */
+  __pyx_t_8 = (__pyx_v_num_threads > 0);
+  if (__pyx_t_8) {
+
+    /* "parallel_matmul.pyx":149
+ * 
+ *     if num_threads > 0:
+ *         omp_set_num_threads(num_threads)             # <<<<<<<<<<<<<<
+ * 
+ *     #
+ */
+    omp_set_num_threads(__pyx_v_num_threads);
+
+    /* "parallel_matmul.pyx":148
+ *         int BLOCK_SIZE = 64
+ * 
+ *     if num_threads > 0:             # <<<<<<<<<<<<<<
+ *         omp_set_num_threads(num_threads)
+ * 
+ */
+  }
+
+  /* "parallel_matmul.pyx":152
+ * 
+ *     #
+ *     for i in range(m):             # <<<<<<<<<<<<<<
+ *         for j in range(p):
+ *             C[i, j] = 0.0
+ */
+  __pyx_t_9 = __pyx_v_m;
+  __pyx_t_10 = __pyx_t_9;
+  for (__pyx_t_11 = 0; __pyx_t_11 < __pyx_t_10; __pyx_t_11+=1) {
+    __pyx_v_i = __pyx_t_11;
+
+    /* "parallel_matmul.pyx":153
+ *     #
+ *     for i in range(m):
+ *         for j in range(p):             # <<<<<<<<<<<<<<
+ *             C[i, j] = 0.0
+ * 
+ */
+    __pyx_t_12 = __pyx_v_p;
+    __pyx_t_13 = __pyx_t_12;
+    for (__pyx_t_14 = 0; __pyx_t_14 < __pyx_t_13; __pyx_t_14+=1) {
+      __pyx_v_j = __pyx_t_14;
+
+      /* "parallel_matmul.pyx":154
+ *     for i in range(m):
+ *         for j in range(p):
+ *             C[i, j] = 0.0             # <<<<<<<<<<<<<<
+ * 
+ *     #    (  )
+ */
+      __pyx_t_15 = __pyx_v_i;
+      __pyx_t_16 = __pyx_v_j;
+      *__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_C.rcbuffer->pybuffer.buf, __pyx_t_15, __pyx_pybuffernd_C.diminfo[0].strides, __pyx_t_16, __pyx_pybuffernd_C.diminfo[1].strides) = 0.0;
+    }
+  }
+
+  /* "parallel_matmul.pyx":158
+ *     #    (  )
+ *     #
+ *     with nogil:             # <<<<<<<<<<<<<<
+ *         for i in prange(m, schedule='static'):
+ *             for j in range(p):
+ */
+  {
+      #ifdef WITH_THREAD
+      PyThreadState *_save;
+      _save = NULL;
+      Py_UNBLOCK_THREADS
+      __Pyx_FastGIL_Remember();
+      #endif
+      /*try:*/ {
+
+        /* "parallel_matmul.pyx":159
+ *     #
+ *     with nogil:
+ *         for i in prange(m, schedule='static'):             # <<<<<<<<<<<<<<
+ *             for j in range(p):
+ *                 for k in range(n):
+ */
+        __pyx_t_9 = __pyx_v_m;
+        {
+            #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+                #undef likely
+                #undef unlikely
+                #define likely(x)   (x)
+                #define unlikely(x) (x)
+            #endif
+            __pyx_t_11 = (__pyx_t_9 - 0 + 1 - 1/abs(1)) / 1;
+            if (__pyx_t_11 > 0)
+            {
+                #ifdef _OPENMP
+                #pragma omp parallel private(__pyx_t_12, __pyx_t_13, __pyx_t_14, __pyx_t_15, __pyx_t_16, __pyx_t_17, __pyx_t_18, __pyx_t_19, __pyx_t_20, __pyx_t_21, __pyx_t_22, __pyx_t_23)
+                #endif /* _OPENMP */
+                {
+                    #ifdef _OPENMP
+                    #pragma omp for firstprivate(__pyx_v_i) lastprivate(__pyx_v_i) lastprivate(__pyx_v_j) lastprivate(__pyx_v_k) schedule(static)
+                    #endif /* _OPENMP */
+                    for (__pyx_t_10 = 0; __pyx_t_10 < __pyx_t_11; __pyx_t_10++){
+                        {
+                            __pyx_v_i = (int)(0 + 1 * __pyx_t_10);
+                            /* Initialize private variables to invalid values */
+                            __pyx_v_j = ((int)0xbad0bad0);
+                            __pyx_v_k = ((int)0xbad0bad0);
+
+                            /* "parallel_matmul.pyx":160
+ *     with nogil:
+ *         for i in prange(m, schedule='static'):
+ *             for j in range(p):             # <<<<<<<<<<<<<<
+ *                 for k in range(n):
+ *                     C[i, j] += A[i, k] * B[k, j]
+ */
+                            __pyx_t_12 = __pyx_v_p;
+                            __pyx_t_13 = __pyx_t_12;
+                            for (__pyx_t_14 = 0; __pyx_t_14 < __pyx_t_13; __pyx_t_14+=1) {
+                              __pyx_v_j = __pyx_t_14;
+
+                              /* "parallel_matmul.pyx":161
+ *         for i in prange(m, schedule='static'):
+ *             for j in range(p):
+ *                 for k in range(n):             # <<<<<<<<<<<<<<
+ *                     C[i, j] += A[i, k] * B[k, j]
+ * 
+ */
+                              __pyx_t_17 = __pyx_v_n;
+                              __pyx_t_18 = __pyx_t_17;
+                              for (__pyx_t_19 = 0; __pyx_t_19 < __pyx_t_18; __pyx_t_19+=1) {
+                                __pyx_v_k = __pyx_t_19;
+
+                                /* "parallel_matmul.pyx":162
+ *             for j in range(p):
+ *                 for k in range(n):
+ *                     C[i, j] += A[i, k] * B[k, j]             # <<<<<<<<<<<<<<
+ * 
+ *     return C
+ */
+                                __pyx_t_16 = __pyx_v_i;
+                                __pyx_t_15 = __pyx_v_k;
+                                __pyx_t_20 = __pyx_v_k;
+                                __pyx_t_21 = __pyx_v_j;
+                                __pyx_t_22 = __pyx_v_i;
+                                __pyx_t_23 = __pyx_v_j;
+                                *__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_C.rcbuffer->pybuffer.buf, __pyx_t_22, __pyx_pybuffernd_C.diminfo[0].strides, __pyx_t_23, __pyx_pybuffernd_C.diminfo[1].strides) += ((*__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_A.rcbuffer->pybuffer.buf, __pyx_t_16, __pyx_pybuffernd_A.diminfo[0].strides, __pyx_t_15, __pyx_pybuffernd_A.diminfo[1].strides)) * (*__Pyx_BufPtrStrided2d(double *, __pyx_pybuffernd_B.rcbuffer->pybuffer.buf, __pyx_t_20, __pyx_pybuffernd_B.diminfo[0].strides, __pyx_t_21, __pyx_pybuffernd_B.diminfo[1].strides)));
+                              }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        #if ((defined(__APPLE__) || defined(__OSX__)) && (defined(__GNUC__) && (__GNUC__ > 2 || (__GNUC__ == 2 && (__GNUC_MINOR__ > 95)))))
+            #undef likely
+            #undef unlikely
+            #define likely(x)   __builtin_expect(!!(x), 1)
+            #define unlikely(x) __builtin_expect(!!(x), 0)
+        #endif
+      }
+
+      /* "parallel_matmul.pyx":158
+ *     #    (  )
+ *     #
+ *     with nogil:             # <<<<<<<<<<<<<<
+ *         for i in prange(m, schedule='static'):
+ *             for j in range(p):
+ */
+      /*finally:*/ {
+        /*normal exit:*/{
+          #ifdef WITH_THREAD
+          __Pyx_FastGIL_Forget();
+          Py_BLOCK_THREADS
+          #endif
+          goto __pyx_L10;
+        }
+        __pyx_L10:;
+      }
+  }
+
+  /* "parallel_matmul.pyx":164
+ *                     C[i, j] += A[i, k] * B[k, j]
+ * 
+ *     return C             # <<<<<<<<<<<<<<
+ * 
+ * def benchmark_matmul(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B, int num_threads=0):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF((PyObject *)__pyx_v_C);
+  __pyx_r = ((PyObject *)__pyx_v_C);
+  goto __pyx_L0;
+
+  /* "parallel_matmul.pyx":125
+ *     return C
+ * 
+ * def matmul_parallel_block(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B, int num_threads=0):             # <<<<<<<<<<<<<<
+ *     """
+ *           .
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
+  { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_A.rcbuffer->pybuffer);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_B.rcbuffer->pybuffer);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_C.rcbuffer->pybuffer);
+  __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
+  __Pyx_AddTraceback("parallel_matmul.matmul_parallel_block", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  goto __pyx_L2;
+  __pyx_L0:;
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_A.rcbuffer->pybuffer);
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_B.rcbuffer->pybuffer);
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_C.rcbuffer->pybuffer);
+  __pyx_L2:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_C);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "parallel_matmul.pyx":166
  *     return C
  * 
  * def benchmark_matmul(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B, int num_threads=0):             # <<<<<<<<<<<<<<
@@ -6208,16 +6611,16 @@ static PyObject *__pyx_pf_15parallel_matmul_4matmul_parallel_optimized(CYTHON_UN
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_15parallel_matmul_7benchmark_matmul(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_15parallel_matmul_9benchmark_matmul(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_15parallel_matmul_6benchmark_matmul, "\n    \353\213\244\354\226\221\355\225\234 \355\226\211\353\240\254 \352\263\261\354\205\210 \354\225\214\352\263\240\353\246\254\354\246\230\354\235\230 \354\204\261\353\212\245\354\235\204 \353\271\204\352\265\220\355\225\251\353\213\210\353\213\244.\n    \n    Args:\n        A: \354\262\253 \353\262\210\354\247\270 \355\226\211\353\240\254\n        B: \353\221\220 \353\262\210\354\247\270 \355\226\211\353\240\254\n        num_threads: \353\263\221\353\240\254 \353\262\204\354\240\204\354\227\220\354\204\234 \354\202\254\354\232\251\355\225\240 \354\212\244\353\240\210\353\223\234 \354\210\230\n    \n    Returns:\n        (\354\210\234\354\260\250 \354\213\234\352\260\204, \353\263\221\353\240\254 \354\213\234\352\260\204, \354\265\234\354\240\201\355\231\224 \353\263\221\353\240\254 \354\213\234\352\260\204) \355\212\234\355\224\214\n    ");
-static PyMethodDef __pyx_mdef_15parallel_matmul_7benchmark_matmul = {"benchmark_matmul", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_15parallel_matmul_7benchmark_matmul, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_15parallel_matmul_6benchmark_matmul};
-static PyObject *__pyx_pw_15parallel_matmul_7benchmark_matmul(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_15parallel_matmul_8benchmark_matmul, "\n    \353\213\244\354\226\221\355\225\234 \355\226\211\353\240\254 \352\263\261\354\205\210 \354\225\214\352\263\240\353\246\254\354\246\230\354\235\230 \354\204\261\353\212\245\354\235\204 \353\271\204\352\265\220\355\225\251\353\213\210\353\213\244.\n    \n    Args:\n        A: \354\262\253 \353\262\210\354\247\270 \355\226\211\353\240\254\n        B: \353\221\220 \353\262\210\354\247\270 \355\226\211\353\240\254\n        num_threads: \353\263\221\353\240\254 \353\262\204\354\240\204\354\227\220\354\204\234 \354\202\254\354\232\251\355\225\240 \354\212\244\353\240\210\353\223\234 \354\210\230\n    \n    Returns:\n        (\354\210\234\354\260\250 \354\213\234\352\260\204, \353\263\221\353\240\254 \354\213\234\352\260\204, \354\265\234\354\240\201\355\231\224 \353\263\221\353\240\254 \354\213\234\352\260\204, \353\270\224\353\241\235 \353\263\221\353\240\254 \354\213\234\352\260\204) \355\212\234\355\224\214\n    ");
+static PyMethodDef __pyx_mdef_15parallel_matmul_9benchmark_matmul = {"benchmark_matmul", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_15parallel_matmul_9benchmark_matmul, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_15parallel_matmul_8benchmark_matmul};
+static PyObject *__pyx_pw_15parallel_matmul_9benchmark_matmul(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -6267,7 +6670,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 112, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 166, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -6275,21 +6678,21 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 112, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 166, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("benchmark_matmul", 0, 2, 3, 1); __PYX_ERR(0, 112, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("benchmark_matmul", 0, 2, 3, 1); __PYX_ERR(0, 166, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_num_threads);
           if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 112, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 166, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "benchmark_matmul") < 0)) __PYX_ERR(0, 112, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "benchmark_matmul") < 0)) __PYX_ERR(0, 166, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -6304,14 +6707,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     __pyx_v_A = ((PyArrayObject *)values[0]);
     __pyx_v_B = ((PyArrayObject *)values[1]);
     if (values[2]) {
-      __pyx_v_num_threads = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 112, __pyx_L3_error)
+      __pyx_v_num_threads = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_num_threads == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 166, __pyx_L3_error)
     } else {
       __pyx_v_num_threads = ((int)((int)0));
     }
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("benchmark_matmul", 0, 2, 3, __pyx_nargs); __PYX_ERR(0, 112, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("benchmark_matmul", 0, 2, 3, __pyx_nargs); __PYX_ERR(0, 166, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6325,9 +6728,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_A), __pyx_ptype_5numpy_ndarray, 1, "A", 0))) __PYX_ERR(0, 112, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_B), __pyx_ptype_5numpy_ndarray, 1, "B", 0))) __PYX_ERR(0, 112, __pyx_L1_error)
-  __pyx_r = __pyx_pf_15parallel_matmul_6benchmark_matmul(__pyx_self, __pyx_v_A, __pyx_v_B, __pyx_v_num_threads);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_A), __pyx_ptype_5numpy_ndarray, 1, "A", 0))) __PYX_ERR(0, 166, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_B), __pyx_ptype_5numpy_ndarray, 1, "B", 0))) __PYX_ERR(0, 166, __pyx_L1_error)
+  __pyx_r = __pyx_pf_15parallel_matmul_8benchmark_matmul(__pyx_self, __pyx_v_A, __pyx_v_B, __pyx_v_num_threads);
 
   /* function exit code */
   goto __pyx_L0;
@@ -6344,16 +6747,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_15parallel_matmul_6benchmark_matmul(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_A, PyArrayObject *__pyx_v_B, int __pyx_v_num_threads) {
+static PyObject *__pyx_pf_15parallel_matmul_8benchmark_matmul(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_A, PyArrayObject *__pyx_v_B, int __pyx_v_num_threads) {
   double __pyx_v_serial_start;
   double __pyx_v_serial_end;
   double __pyx_v_parallel_start;
   double __pyx_v_parallel_end;
   double __pyx_v_opt_start;
   double __pyx_v_opt_end;
+  double __pyx_v_block_start;
+  double __pyx_v_block_end;
   double __pyx_v_serial_time;
   double __pyx_v_parallel_time;
   double __pyx_v_opt_time;
+  double __pyx_v_block_time;
   CYTHON_UNUSED PyObject *__pyx_v__ = NULL;
   __Pyx_LocalBuf_ND __pyx_pybuffernd_A;
   __Pyx_Buffer __pyx_pybuffer_A;
@@ -6366,6 +6772,7 @@ static PyObject *__pyx_pf_15parallel_matmul_6benchmark_matmul(CYTHON_UNUSED PyOb
   PyObject *__pyx_t_3 = NULL;
   unsigned int __pyx_t_4;
   PyObject *__pyx_t_5 = NULL;
+  PyObject *__pyx_t_6 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -6380,16 +6787,16 @@ static PyObject *__pyx_pf_15parallel_matmul_6benchmark_matmul(CYTHON_UNUSED PyOb
   __pyx_pybuffernd_B.rcbuffer = &__pyx_pybuffer_B;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_A.rcbuffer->pybuffer, (PyObject*)__pyx_v_A, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 112, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_A.rcbuffer->pybuffer, (PyObject*)__pyx_v_A, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 166, __pyx_L1_error)
   }
   __pyx_pybuffernd_A.diminfo[0].strides = __pyx_pybuffernd_A.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_A.diminfo[0].shape = __pyx_pybuffernd_A.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_A.diminfo[1].strides = __pyx_pybuffernd_A.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_A.diminfo[1].shape = __pyx_pybuffernd_A.rcbuffer->pybuffer.shape[1];
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_B.rcbuffer->pybuffer, (PyObject*)__pyx_v_B, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 112, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_B.rcbuffer->pybuffer, (PyObject*)__pyx_v_B, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_STRIDES, 2, 0, __pyx_stack) == -1)) __PYX_ERR(0, 166, __pyx_L1_error)
   }
   __pyx_pybuffernd_B.diminfo[0].strides = __pyx_pybuffernd_B.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_B.diminfo[0].shape = __pyx_pybuffernd_B.rcbuffer->pybuffer.shape[0]; __pyx_pybuffernd_B.diminfo[1].strides = __pyx_pybuffernd_B.rcbuffer->pybuffer.strides[1]; __pyx_pybuffernd_B.diminfo[1].shape = __pyx_pybuffernd_B.rcbuffer->pybuffer.shape[1];
 
-  /* "parallel_matmul.pyx":130
+  /* "parallel_matmul.pyx":184
  * 
  *     #
  *     serial_start = omp_get_wtime()             # <<<<<<<<<<<<<<
@@ -6398,14 +6805,14 @@ static PyObject *__pyx_pf_15parallel_matmul_6benchmark_matmul(CYTHON_UNUSED PyOb
  */
   __pyx_v_serial_start = omp_get_wtime();
 
-  /* "parallel_matmul.pyx":131
+  /* "parallel_matmul.pyx":185
  *     #
  *     serial_start = omp_get_wtime()
  *     _ = matmul_serial(A, B)             # <<<<<<<<<<<<<<
  *     serial_end = omp_get_wtime()
  *     serial_time = serial_end - serial_start
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_matmul_serial); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 131, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_matmul_serial); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 185, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -6425,14 +6832,14 @@ static PyObject *__pyx_pf_15parallel_matmul_6benchmark_matmul(CYTHON_UNUSED PyOb
     PyObject *__pyx_callargs[3] = {__pyx_t_3, ((PyObject *)__pyx_v_A), ((PyObject *)__pyx_v_B)};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 2+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 131, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 185, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __pyx_v__ = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "parallel_matmul.pyx":132
+  /* "parallel_matmul.pyx":186
  *     serial_start = omp_get_wtime()
  *     _ = matmul_serial(A, B)
  *     serial_end = omp_get_wtime()             # <<<<<<<<<<<<<<
@@ -6441,7 +6848,7 @@ static PyObject *__pyx_pf_15parallel_matmul_6benchmark_matmul(CYTHON_UNUSED PyOb
  */
   __pyx_v_serial_end = omp_get_wtime();
 
-  /* "parallel_matmul.pyx":133
+  /* "parallel_matmul.pyx":187
  *     _ = matmul_serial(A, B)
  *     serial_end = omp_get_wtime()
  *     serial_time = serial_end - serial_start             # <<<<<<<<<<<<<<
@@ -6450,7 +6857,7 @@ static PyObject *__pyx_pf_15parallel_matmul_6benchmark_matmul(CYTHON_UNUSED PyOb
  */
   __pyx_v_serial_time = (__pyx_v_serial_end - __pyx_v_serial_start);
 
-  /* "parallel_matmul.pyx":136
+  /* "parallel_matmul.pyx":190
  * 
  *     #
  *     parallel_start = omp_get_wtime()             # <<<<<<<<<<<<<<
@@ -6459,16 +6866,16 @@ static PyObject *__pyx_pf_15parallel_matmul_6benchmark_matmul(CYTHON_UNUSED PyOb
  */
   __pyx_v_parallel_start = omp_get_wtime();
 
-  /* "parallel_matmul.pyx":137
+  /* "parallel_matmul.pyx":191
  *     #
  *     parallel_start = omp_get_wtime()
  *     _ = matmul_parallel(A, B, num_threads)             # <<<<<<<<<<<<<<
  *     parallel_end = omp_get_wtime()
  *     parallel_time = parallel_end - parallel_start
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_matmul_parallel); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_matmul_parallel); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 191, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 137, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 191, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_5 = NULL;
   __pyx_t_4 = 0;
@@ -6489,14 +6896,14 @@ static PyObject *__pyx_pf_15parallel_matmul_6benchmark_matmul(CYTHON_UNUSED PyOb
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 3+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 137, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 191, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __Pyx_DECREF_SET(__pyx_v__, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "parallel_matmul.pyx":138
+  /* "parallel_matmul.pyx":192
  *     parallel_start = omp_get_wtime()
  *     _ = matmul_parallel(A, B, num_threads)
  *     parallel_end = omp_get_wtime()             # <<<<<<<<<<<<<<
@@ -6505,7 +6912,7 @@ static PyObject *__pyx_pf_15parallel_matmul_6benchmark_matmul(CYTHON_UNUSED PyOb
  */
   __pyx_v_parallel_end = omp_get_wtime();
 
-  /* "parallel_matmul.pyx":139
+  /* "parallel_matmul.pyx":193
  *     _ = matmul_parallel(A, B, num_threads)
  *     parallel_end = omp_get_wtime()
  *     parallel_time = parallel_end - parallel_start             # <<<<<<<<<<<<<<
@@ -6514,7 +6921,7 @@ static PyObject *__pyx_pf_15parallel_matmul_6benchmark_matmul(CYTHON_UNUSED PyOb
  */
   __pyx_v_parallel_time = (__pyx_v_parallel_end - __pyx_v_parallel_start);
 
-  /* "parallel_matmul.pyx":142
+  /* "parallel_matmul.pyx":196
  * 
  *     #
  *     opt_start = omp_get_wtime()             # <<<<<<<<<<<<<<
@@ -6523,16 +6930,16 @@ static PyObject *__pyx_pf_15parallel_matmul_6benchmark_matmul(CYTHON_UNUSED PyOb
  */
   __pyx_v_opt_start = omp_get_wtime();
 
-  /* "parallel_matmul.pyx":143
+  /* "parallel_matmul.pyx":197
  *     #
  *     opt_start = omp_get_wtime()
  *     _ = matmul_parallel_optimized(A, B, num_threads)             # <<<<<<<<<<<<<<
  *     opt_end = omp_get_wtime()
  *     opt_time = opt_end - opt_start
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_matmul_parallel_optimized); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_matmul_parallel_optimized); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 143, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 197, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_5 = NULL;
   __pyx_t_4 = 0;
@@ -6553,14 +6960,14 @@ static PyObject *__pyx_pf_15parallel_matmul_6benchmark_matmul(CYTHON_UNUSED PyOb
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 3+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 143, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 197, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __Pyx_DECREF_SET(__pyx_v__, __pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "parallel_matmul.pyx":144
+  /* "parallel_matmul.pyx":198
  *     opt_start = omp_get_wtime()
  *     _ = matmul_parallel_optimized(A, B, num_threads)
  *     opt_end = omp_get_wtime()             # <<<<<<<<<<<<<<
@@ -6569,45 +6976,114 @@ static PyObject *__pyx_pf_15parallel_matmul_6benchmark_matmul(CYTHON_UNUSED PyOb
  */
   __pyx_v_opt_end = omp_get_wtime();
 
-  /* "parallel_matmul.pyx":145
+  /* "parallel_matmul.pyx":199
  *     _ = matmul_parallel_optimized(A, B, num_threads)
  *     opt_end = omp_get_wtime()
  *     opt_time = opt_end - opt_start             # <<<<<<<<<<<<<<
  * 
- *     return serial_time, parallel_time, opt_time
+ *     #
  */
   __pyx_v_opt_time = (__pyx_v_opt_end - __pyx_v_opt_start);
 
-  /* "parallel_matmul.pyx":147
- *     opt_time = opt_end - opt_start
+  /* "parallel_matmul.pyx":202
  * 
- *     return serial_time, parallel_time, opt_time             # <<<<<<<<<<<<<<
+ *     #
+ *     block_start = omp_get_wtime()             # <<<<<<<<<<<<<<
+ *     _ = matmul_parallel_block(A, B, num_threads)
+ *     block_end = omp_get_wtime()
+ */
+  __pyx_v_block_start = omp_get_wtime();
+
+  /* "parallel_matmul.pyx":203
+ *     #
+ *     block_start = omp_get_wtime()
+ *     _ = matmul_parallel_block(A, B, num_threads)             # <<<<<<<<<<<<<<
+ *     block_end = omp_get_wtime()
+ *     block_time = block_end - block_start
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_matmul_parallel_block); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_num_threads); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 203, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_5 = NULL;
+  __pyx_t_4 = 0;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_5)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+      __pyx_t_4 = 1;
+    }
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[4] = {__pyx_t_5, ((PyObject *)__pyx_v_A), ((PyObject *)__pyx_v_B), __pyx_t_3};
+    __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 3+__pyx_t_4);
+    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 203, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  }
+  __Pyx_DECREF_SET(__pyx_v__, __pyx_t_1);
+  __pyx_t_1 = 0;
+
+  /* "parallel_matmul.pyx":204
+ *     block_start = omp_get_wtime()
+ *     _ = matmul_parallel_block(A, B, num_threads)
+ *     block_end = omp_get_wtime()             # <<<<<<<<<<<<<<
+ *     block_time = block_end - block_start
+ * 
+ */
+  __pyx_v_block_end = omp_get_wtime();
+
+  /* "parallel_matmul.pyx":205
+ *     _ = matmul_parallel_block(A, B, num_threads)
+ *     block_end = omp_get_wtime()
+ *     block_time = block_end - block_start             # <<<<<<<<<<<<<<
+ * 
+ *     return serial_time, parallel_time, opt_time, block_time
+ */
+  __pyx_v_block_time = (__pyx_v_block_end - __pyx_v_block_start);
+
+  /* "parallel_matmul.pyx":207
+ *     block_time = block_end - block_start
+ * 
+ *     return serial_time, parallel_time, opt_time, block_time             # <<<<<<<<<<<<<<
  * 
  * def create_matrices(int size):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_serial_time); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_1 = PyFloat_FromDouble(__pyx_v_serial_time); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_parallel_time); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_parallel_time); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_opt_time); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_opt_time); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 147, __pyx_L1_error)
+  __pyx_t_5 = PyFloat_FromDouble(__pyx_v_block_time); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_6 = PyTuple_New(4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_1)) __PYX_ERR(0, 207, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_2)) __PYX_ERR(0, 207, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_3);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 2, __pyx_t_3)) __PYX_ERR(0, 147, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 2, __pyx_t_3)) __PYX_ERR(0, 207, __pyx_L1_error);
+  __Pyx_GIVEREF(__pyx_t_5);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 3, __pyx_t_5)) __PYX_ERR(0, 207, __pyx_L1_error);
   __pyx_t_1 = 0;
   __pyx_t_2 = 0;
   __pyx_t_3 = 0;
-  __pyx_r = __pyx_t_5;
   __pyx_t_5 = 0;
+  __pyx_r = __pyx_t_6;
+  __pyx_t_6 = 0;
   goto __pyx_L0;
 
-  /* "parallel_matmul.pyx":112
+  /* "parallel_matmul.pyx":166
  *     return C
  * 
  * def benchmark_matmul(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B, int num_threads=0):             # <<<<<<<<<<<<<<
@@ -6621,6 +7097,7 @@ static PyObject *__pyx_pf_15parallel_matmul_6benchmark_matmul(CYTHON_UNUSED PyOb
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_5);
+  __Pyx_XDECREF(__pyx_t_6);
   { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
     __Pyx_PyThreadState_declare
     __Pyx_PyThreadState_assign
@@ -6641,8 +7118,8 @@ static PyObject *__pyx_pf_15parallel_matmul_6benchmark_matmul(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
-/* "parallel_matmul.pyx":149
- *     return serial_time, parallel_time, opt_time
+/* "parallel_matmul.pyx":209
+ *     return serial_time, parallel_time, opt_time, block_time
  * 
  * def create_matrices(int size):             # <<<<<<<<<<<<<<
  *     """
@@ -6650,16 +7127,16 @@ static PyObject *__pyx_pf_15parallel_matmul_6benchmark_matmul(CYTHON_UNUSED PyOb
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_15parallel_matmul_9create_matrices(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_15parallel_matmul_11create_matrices(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_15parallel_matmul_8create_matrices, "\n    \355\205\214\354\212\244\355\212\270\354\232\251 \353\254\264\354\236\221\354\234\204 \355\226\211\353\240\254\354\235\204 \354\203\235\354\204\261\355\225\251\353\213\210\353\213\244.\n    \n    Args:\n        size: \355\226\211\353\240\254\354\235\230 \355\201\254\352\270\260 (size x size)\n    \n    Returns:\n        (A, B) \353\221\220 \352\260\234\354\235\230 \353\254\264\354\236\221\354\234\204 \355\226\211\353\240\254\n    ");
-static PyMethodDef __pyx_mdef_15parallel_matmul_9create_matrices = {"create_matrices", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_15parallel_matmul_9create_matrices, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_15parallel_matmul_8create_matrices};
-static PyObject *__pyx_pw_15parallel_matmul_9create_matrices(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_15parallel_matmul_10create_matrices, "\n    \355\205\214\354\212\244\355\212\270\354\232\251 \353\254\264\354\236\221\354\234\204 \355\226\211\353\240\254\354\235\204 \354\203\235\354\204\261\355\225\251\353\213\210\353\213\244.\n    \n    Args:\n        size: \355\226\211\353\240\254\354\235\230 \355\201\254\352\270\260 (size x size)\n    \n    Returns:\n        (A, B) \353\221\220 \352\260\234\354\235\230 \353\254\264\354\236\221\354\234\204 \355\226\211\353\240\254\n    ");
+static PyMethodDef __pyx_mdef_15parallel_matmul_11create_matrices = {"create_matrices", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_15parallel_matmul_11create_matrices, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_15parallel_matmul_10create_matrices};
+static PyObject *__pyx_pw_15parallel_matmul_11create_matrices(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -6703,23 +7180,23 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 149, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 209, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "create_matrices") < 0)) __PYX_ERR(0, 149, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "create_matrices") < 0)) __PYX_ERR(0, 209, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
     }
-    __pyx_v_size = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_size == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 149, __pyx_L3_error)
+    __pyx_v_size = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_size == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 209, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("create_matrices", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 149, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("create_matrices", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 209, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -6733,7 +7210,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_15parallel_matmul_8create_matrices(__pyx_self, __pyx_v_size);
+  __pyx_r = __pyx_pf_15parallel_matmul_10create_matrices(__pyx_self, __pyx_v_size);
 
   /* function exit code */
   {
@@ -6746,7 +7223,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_15parallel_matmul_8create_matrices(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_size) {
+static PyObject *__pyx_pf_15parallel_matmul_10create_matrices(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_size) {
   PyObject *__pyx_v_A = NULL;
   PyObject *__pyx_v_B = NULL;
   PyObject *__pyx_r = NULL;
@@ -6762,31 +7239,31 @@ static PyObject *__pyx_pf_15parallel_matmul_8create_matrices(CYTHON_UNUSED PyObj
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("create_matrices", 1);
 
-  /* "parallel_matmul.pyx":159
+  /* "parallel_matmul.pyx":219
  *         (A, B)
  *     """
  *     A = np.random.random((size, size))             # <<<<<<<<<<<<<<
  *     B = np.random.random((size, size))
  *     return A, B
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 219, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_random); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_random); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 219, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_random); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_random); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 219, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_size); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_size); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 219, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_size); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_size); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 219, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 219, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_3);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3)) __PYX_ERR(0, 159, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3)) __PYX_ERR(0, 219, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_4);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_4)) __PYX_ERR(0, 159, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_4)) __PYX_ERR(0, 219, __pyx_L1_error);
   __pyx_t_3 = 0;
   __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -6808,37 +7285,37 @@ static PyObject *__pyx_pf_15parallel_matmul_8create_matrices(CYTHON_UNUSED PyObj
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 219, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __pyx_v_A = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "parallel_matmul.pyx":160
+  /* "parallel_matmul.pyx":220
  *     """
  *     A = np.random.random((size, size))
  *     B = np.random.random((size, size))             # <<<<<<<<<<<<<<
  *     return A, B
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_random); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_random); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_random); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_random); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_size); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_size); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_size); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_size); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 160, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 220, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_5);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_5)) __PYX_ERR(0, 160, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_5)) __PYX_ERR(0, 220, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_4);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_4)) __PYX_ERR(0, 160, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_4)) __PYX_ERR(0, 220, __pyx_L1_error);
   __pyx_t_5 = 0;
   __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -6860,33 +7337,33 @@ static PyObject *__pyx_pf_15parallel_matmul_8create_matrices(CYTHON_UNUSED PyObj
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 160, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 220, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __pyx_v_B = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "parallel_matmul.pyx":161
+  /* "parallel_matmul.pyx":221
  *     A = np.random.random((size, size))
  *     B = np.random.random((size, size))
  *     return A, B             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 221, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_v_A);
   __Pyx_GIVEREF(__pyx_v_A);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_A)) __PYX_ERR(0, 161, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_A)) __PYX_ERR(0, 221, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_B);
   __Pyx_GIVEREF(__pyx_v_B);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_B)) __PYX_ERR(0, 161, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_B)) __PYX_ERR(0, 221, __pyx_L1_error);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "parallel_matmul.pyx":149
- *     return serial_time, parallel_time, opt_time
+  /* "parallel_matmul.pyx":209
+ *     return serial_time, parallel_time, opt_time, block_time
  * 
  * def create_matrices(int size):             # <<<<<<<<<<<<<<
  *     """
@@ -6928,14 +7405,19 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
   __Pyx_StringTabEntry __pyx_string_tab[] = {
     {&__pyx_n_s_A, __pyx_k_A, sizeof(__pyx_k_A), 0, 0, 1, 1},
     {&__pyx_n_s_B, __pyx_k_B, sizeof(__pyx_k_B), 0, 0, 1, 1},
+    {&__pyx_n_s_BLOCK_SIZE, __pyx_k_BLOCK_SIZE, sizeof(__pyx_k_BLOCK_SIZE), 0, 0, 1, 1},
     {&__pyx_n_s_B_T, __pyx_k_B_T, sizeof(__pyx_k_B_T), 0, 0, 1, 1},
     {&__pyx_n_s_C, __pyx_k_C, sizeof(__pyx_k_C), 0, 0, 1, 1},
     {&__pyx_n_s_ImportError, __pyx_k_ImportError, sizeof(__pyx_k_ImportError), 0, 0, 1, 1},
-    {&__pyx_n_s__10, __pyx_k__10, sizeof(__pyx_k__10), 0, 0, 1, 1},
-    {&__pyx_n_s__15, __pyx_k__15, sizeof(__pyx_k__15), 0, 0, 1, 1},
+    {&__pyx_n_s__12, __pyx_k__12, sizeof(__pyx_k__12), 0, 0, 1, 1},
+    {&__pyx_n_s__17, __pyx_k__17, sizeof(__pyx_k__17), 0, 0, 1, 1},
     {&__pyx_n_s__3, __pyx_k__3, sizeof(__pyx_k__3), 0, 0, 1, 1},
+    {&__pyx_n_s_ascontiguousarray, __pyx_k_ascontiguousarray, sizeof(__pyx_k_ascontiguousarray), 0, 0, 1, 1},
     {&__pyx_n_s_asyncio_coroutines, __pyx_k_asyncio_coroutines, sizeof(__pyx_k_asyncio_coroutines), 0, 0, 1, 1},
     {&__pyx_n_s_benchmark_matmul, __pyx_k_benchmark_matmul, sizeof(__pyx_k_benchmark_matmul), 0, 0, 1, 1},
+    {&__pyx_n_s_block_end, __pyx_k_block_end, sizeof(__pyx_k_block_end), 0, 0, 1, 1},
+    {&__pyx_n_s_block_start, __pyx_k_block_start, sizeof(__pyx_k_block_start), 0, 0, 1, 1},
+    {&__pyx_n_s_block_time, __pyx_k_block_time, sizeof(__pyx_k_block_time), 0, 0, 1, 1},
     {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
     {&__pyx_n_s_create_matrices, __pyx_k_create_matrices, sizeof(__pyx_k_create_matrices), 0, 0, 1, 1},
     {&__pyx_n_s_dtype, __pyx_k_dtype, sizeof(__pyx_k_dtype), 0, 0, 1, 1},
@@ -6949,6 +7431,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_m, __pyx_k_m, sizeof(__pyx_k_m), 0, 0, 1, 1},
     {&__pyx_n_s_main, __pyx_k_main, sizeof(__pyx_k_main), 0, 0, 1, 1},
     {&__pyx_n_s_matmul_parallel, __pyx_k_matmul_parallel, sizeof(__pyx_k_matmul_parallel), 0, 0, 1, 1},
+    {&__pyx_n_s_matmul_parallel_block, __pyx_k_matmul_parallel_block, sizeof(__pyx_k_matmul_parallel_block), 0, 0, 1, 1},
     {&__pyx_n_s_matmul_parallel_optimized, __pyx_k_matmul_parallel_optimized, sizeof(__pyx_k_matmul_parallel_optimized), 0, 0, 1, 1},
     {&__pyx_n_s_matmul_serial, __pyx_k_matmul_serial, sizeof(__pyx_k_matmul_serial), 0, 0, 1, 1},
     {&__pyx_n_s_n, __pyx_k_n, sizeof(__pyx_k_n), 0, 0, 1, 1},
@@ -6983,7 +7466,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
 }
 /* #### Code section: cached_builtins ### */
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_builtin_range = __Pyx_GetBuiltinName(__pyx_n_s_range); if (!__pyx_builtin_range) __PYX_ERR(0, 43, __pyx_L1_error)
   __pyx_builtin_ImportError = __Pyx_GetBuiltinName(__pyx_n_s_ImportError); if (!__pyx_builtin_ImportError) __PYX_ERR(1, 983, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
@@ -7017,65 +7500,77 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "parallel_matmul.pyx":16
- *     double omp_get_wtime()
+  /* "parallel_matmul.pyx":24
+ *     return a if a < b else b
  * 
  * def matmul_serial(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B):             # <<<<<<<<<<<<<<
  *     """
  *         .
  */
-  __pyx_tuple__4 = PyTuple_Pack(9, __pyx_n_s_A, __pyx_n_s_B, __pyx_n_s_m, __pyx_n_s_n, __pyx_n_s_p, __pyx_n_s_C, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_k); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 16, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(9, __pyx_n_s_A, __pyx_n_s_B, __pyx_n_s_m, __pyx_n_s_n, __pyx_n_s_p, __pyx_n_s_C, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_k); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
-  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_matmul_pyx, __pyx_n_s_matmul_serial, 16, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 16, __pyx_L1_error)
+  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_matmul_pyx, __pyx_n_s_matmul_serial, 24, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(0, 24, __pyx_L1_error)
 
-  /* "parallel_matmul.pyx":42
+  /* "parallel_matmul.pyx":50
  *     return C
  * 
  * def matmul_parallel(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B, int num_threads=0):             # <<<<<<<<<<<<<<
  *     """
  *         .
  */
-  __pyx_tuple__6 = PyTuple_Pack(10, __pyx_n_s_A, __pyx_n_s_B, __pyx_n_s_num_threads, __pyx_n_s_m, __pyx_n_s_n, __pyx_n_s_p, __pyx_n_s_C, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_k); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(10, __pyx_n_s_A, __pyx_n_s_B, __pyx_n_s_num_threads, __pyx_n_s_m, __pyx_n_s_n, __pyx_n_s_p, __pyx_n_s_C, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_k); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
-  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_matmul_pyx, __pyx_n_s_matmul_parallel, 42, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_matmul_pyx, __pyx_n_s_matmul_parallel, 50, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 50, __pyx_L1_error)
 
-  /* "parallel_matmul.pyx":75
+  /* "parallel_matmul.pyx":86
  *     return C
  * 
  * def matmul_parallel_optimized(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B, int num_threads=0):             # <<<<<<<<<<<<<<
  *     """
  *           .
  */
-  __pyx_tuple__8 = PyTuple_Pack(11, __pyx_n_s_A, __pyx_n_s_B, __pyx_n_s_num_threads, __pyx_n_s_m, __pyx_n_s_n, __pyx_n_s_p, __pyx_n_s_C, __pyx_n_s_B_T, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_k); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_tuple__8 = PyTuple_Pack(11, __pyx_n_s_A, __pyx_n_s_B, __pyx_n_s_num_threads, __pyx_n_s_m, __pyx_n_s_n, __pyx_n_s_p, __pyx_n_s_C, __pyx_n_s_B_T, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_k); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
-  __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_matmul_pyx, __pyx_n_s_matmul_parallel_optimized, 75, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_matmul_pyx, __pyx_n_s_matmul_parallel_optimized, 86, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(0, 86, __pyx_L1_error)
 
-  /* "parallel_matmul.pyx":112
+  /* "parallel_matmul.pyx":125
+ *     return C
+ * 
+ * def matmul_parallel_block(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B, int num_threads=0):             # <<<<<<<<<<<<<<
+ *     """
+ *           .
+ */
+  __pyx_tuple__10 = PyTuple_Pack(11, __pyx_n_s_A, __pyx_n_s_B, __pyx_n_s_num_threads, __pyx_n_s_m, __pyx_n_s_n, __pyx_n_s_p, __pyx_n_s_C, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_k, __pyx_n_s_BLOCK_SIZE); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__10);
+  __Pyx_GIVEREF(__pyx_tuple__10);
+  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_matmul_pyx, __pyx_n_s_matmul_parallel_block, 125, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(0, 125, __pyx_L1_error)
+
+  /* "parallel_matmul.pyx":166
  *     return C
  * 
  * def benchmark_matmul(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B, int num_threads=0):             # <<<<<<<<<<<<<<
  *     """
  *          .
  */
-  __pyx_tuple__11 = PyTuple_Pack(13, __pyx_n_s_A, __pyx_n_s_B, __pyx_n_s_num_threads, __pyx_n_s_serial_start, __pyx_n_s_serial_end, __pyx_n_s_parallel_start, __pyx_n_s_parallel_end, __pyx_n_s_opt_start, __pyx_n_s_opt_end, __pyx_n_s_serial_time, __pyx_n_s_parallel_time, __pyx_n_s_opt_time, __pyx_n_s__10); if (unlikely(!__pyx_tuple__11)) __PYX_ERR(0, 112, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__11);
-  __Pyx_GIVEREF(__pyx_tuple__11);
-  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 13, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__11, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_matmul_pyx, __pyx_n_s_benchmark_matmul, 112, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(0, 112, __pyx_L1_error)
+  __pyx_tuple__13 = PyTuple_Pack(16, __pyx_n_s_A, __pyx_n_s_B, __pyx_n_s_num_threads, __pyx_n_s_serial_start, __pyx_n_s_serial_end, __pyx_n_s_parallel_start, __pyx_n_s_parallel_end, __pyx_n_s_opt_start, __pyx_n_s_opt_end, __pyx_n_s_block_start, __pyx_n_s_block_end, __pyx_n_s_serial_time, __pyx_n_s_parallel_time, __pyx_n_s_opt_time, __pyx_n_s_block_time, __pyx_n_s__12); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 166, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__13);
+  __Pyx_GIVEREF(__pyx_tuple__13);
+  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 16, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_matmul_pyx, __pyx_n_s_benchmark_matmul, 166, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 166, __pyx_L1_error)
 
-  /* "parallel_matmul.pyx":149
- *     return serial_time, parallel_time, opt_time
+  /* "parallel_matmul.pyx":209
+ *     return serial_time, parallel_time, opt_time, block_time
  * 
  * def create_matrices(int size):             # <<<<<<<<<<<<<<
  *     """
  *        .
  */
-  __pyx_tuple__13 = PyTuple_Pack(3, __pyx_n_s_size, __pyx_n_s_A, __pyx_n_s_B); if (unlikely(!__pyx_tuple__13)) __PYX_ERR(0, 149, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__13);
-  __Pyx_GIVEREF(__pyx_tuple__13);
-  __pyx_codeobj__14 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__13, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_matmul_pyx, __pyx_n_s_create_matrices, 149, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__14)) __PYX_ERR(0, 149, __pyx_L1_error)
+  __pyx_tuple__15 = PyTuple_Pack(3, __pyx_n_s_size, __pyx_n_s_A, __pyx_n_s_B); if (unlikely(!__pyx_tuple__15)) __PYX_ERR(0, 209, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__15);
+  __Pyx_GIVEREF(__pyx_tuple__15);
+  __pyx_codeobj__16 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__15, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_parallel_matmul_pyx, __pyx_n_s_create_matrices, 209, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__16)) __PYX_ERR(0, 209, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -7506,109 +8001,130 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(0, 1, __pyx_L1_error)
   #endif
 
-  /* "parallel_matmul.pyx":4
- * # distutils: language=c++
+  /* "parallel_matmul.pyx":5
+ * # cython: boundscheck=False, wraparound=False, cdivision=True, initializedcheck=False
  * 
  * import numpy as np             # <<<<<<<<<<<<<<
  * cimport numpy as np
  * from cython.parallel import prange, parallel
  */
-  __pyx_t_2 = __Pyx_ImportDottedModule(__pyx_n_s_numpy, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_ImportDottedModule(__pyx_n_s_numpy, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_2) < 0) __PYX_ERR(0, 4, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_2) < 0) __PYX_ERR(0, 5, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "parallel_matmul.pyx":16
- *     double omp_get_wtime()
+  /* "parallel_matmul.pyx":24
+ *     return a if a < b else b
  * 
  * def matmul_serial(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B):             # <<<<<<<<<<<<<<
  *     """
  *         .
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_15parallel_matmul_1matmul_serial, 0, __pyx_n_s_matmul_serial, NULL, __pyx_n_s_parallel_matmul, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 16, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_15parallel_matmul_1matmul_serial, 0, __pyx_n_s_matmul_serial, NULL, __pyx_n_s_parallel_matmul, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_matmul_serial, __pyx_t_2) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_matmul_serial, __pyx_t_2) < 0) __PYX_ERR(0, 24, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "parallel_matmul.pyx":42
+  /* "parallel_matmul.pyx":50
  *     return C
  * 
  * def matmul_parallel(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B, int num_threads=0):             # <<<<<<<<<<<<<<
  *     """
  *         .
  */
-  __pyx_t_2 = __Pyx_PyInt_From_int(((int)0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(((int)0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_15parallel_matmul_3matmul_parallel, 0, __pyx_n_s_matmul_parallel, NULL, __pyx_n_s_parallel_matmul, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_15parallel_matmul_3matmul_parallel, 0, __pyx_n_s_matmul_parallel, NULL, __pyx_n_s_parallel_matmul, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_matmul_parallel, __pyx_t_2) < 0) __PYX_ERR(0, 42, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_matmul_parallel, __pyx_t_2) < 0) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "parallel_matmul.pyx":75
+  /* "parallel_matmul.pyx":86
  *     return C
  * 
  * def matmul_parallel_optimized(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B, int num_threads=0):             # <<<<<<<<<<<<<<
  *     """
  *           .
  */
-  __pyx_t_2 = __Pyx_PyInt_From_int(((int)0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(((int)0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2)) __PYX_ERR(0, 86, __pyx_L1_error);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_15parallel_matmul_5matmul_parallel_optimized, 0, __pyx_n_s_matmul_parallel_optimized, NULL, __pyx_n_s_parallel_matmul, __pyx_d, ((PyObject *)__pyx_codeobj__9)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_15parallel_matmul_5matmul_parallel_optimized, 0, __pyx_n_s_matmul_parallel_optimized, NULL, __pyx_n_s_parallel_matmul, __pyx_d, ((PyObject *)__pyx_codeobj__9)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_matmul_parallel_optimized, __pyx_t_2) < 0) __PYX_ERR(0, 75, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_matmul_parallel_optimized, __pyx_t_2) < 0) __PYX_ERR(0, 86, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "parallel_matmul.pyx":112
+  /* "parallel_matmul.pyx":125
+ *     return C
+ * 
+ * def matmul_parallel_block(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B, int num_threads=0):             # <<<<<<<<<<<<<<
+ *     """
+ *           .
+ */
+  __pyx_t_2 = __Pyx_PyInt_From_int(((int)0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_2);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2)) __PYX_ERR(0, 125, __pyx_L1_error);
+  __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_15parallel_matmul_7matmul_parallel_block, 0, __pyx_n_s_matmul_parallel_block, NULL, __pyx_n_s_parallel_matmul, __pyx_d, ((PyObject *)__pyx_codeobj__11)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 125, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_t_3);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_matmul_parallel_block, __pyx_t_2) < 0) __PYX_ERR(0, 125, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "parallel_matmul.pyx":166
  *     return C
  * 
  * def benchmark_matmul(np.ndarray[double, ndim=2] A, np.ndarray[double, ndim=2] B, int num_threads=0):             # <<<<<<<<<<<<<<
  *     """
  *          .
  */
-  __pyx_t_2 = __Pyx_PyInt_From_int(((int)0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 112, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(((int)0)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 112, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2)) __PYX_ERR(0, 112, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2)) __PYX_ERR(0, 166, __pyx_L1_error);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_15parallel_matmul_7benchmark_matmul, 0, __pyx_n_s_benchmark_matmul, NULL, __pyx_n_s_parallel_matmul, __pyx_d, ((PyObject *)__pyx_codeobj__12)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 112, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_15parallel_matmul_9benchmark_matmul, 0, __pyx_n_s_benchmark_matmul, NULL, __pyx_n_s_parallel_matmul, __pyx_d, ((PyObject *)__pyx_codeobj__14)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_2, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_benchmark_matmul, __pyx_t_2) < 0) __PYX_ERR(0, 112, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_benchmark_matmul, __pyx_t_2) < 0) __PYX_ERR(0, 166, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "parallel_matmul.pyx":149
- *     return serial_time, parallel_time, opt_time
+  /* "parallel_matmul.pyx":209
+ *     return serial_time, parallel_time, opt_time, block_time
  * 
  * def create_matrices(int size):             # <<<<<<<<<<<<<<
  *     """
  *        .
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_15parallel_matmul_9create_matrices, 0, __pyx_n_s_create_matrices, NULL, __pyx_n_s_parallel_matmul, __pyx_d, ((PyObject *)__pyx_codeobj__14)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 149, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_15parallel_matmul_11create_matrices, 0, __pyx_n_s_create_matrices, NULL, __pyx_n_s_parallel_matmul, __pyx_d, ((PyObject *)__pyx_codeobj__16)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 209, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_create_matrices, __pyx_t_2) < 0) __PYX_ERR(0, 149, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_create_matrices, __pyx_t_2) < 0) __PYX_ERR(0, 209, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "parallel_matmul.pyx":1
  * # cython: language_level=3             # <<<<<<<<<<<<<<
  * # distutils: language=c++
- * 
+ * # cython: boundscheck=False, wraparound=False, cdivision=True, initializedcheck=False
  */
   __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -9309,23 +9825,6 @@ static CYTHON_INLINE PyObject *__Pyx__GetModuleGlobalName(PyObject *name)
     __Pyx_DECREF_TypeName(obj_type_name);
     __Pyx_DECREF_TypeName(type_name);
     return 0;
-}
-
-/* BufferIndexError */
-  static void __Pyx_RaiseBufferIndexError(int axis) {
-  PyErr_Format(PyExc_IndexError,
-     "Out of bounds on buffer access (axis %d)", axis);
-}
-
-/* BufferIndexErrorNogil */
-  static void __Pyx_RaiseBufferIndexErrorNogil(int axis) {
-    #ifdef WITH_THREAD
-    PyGILState_STATE gilstate = PyGILState_Ensure();
-    #endif
-    __Pyx_RaiseBufferIndexError(axis);
-    #ifdef WITH_THREAD
-    PyGILState_Release(gilstate);
-    #endif
 }
 
 /* PyFunctionFastCall */
@@ -12093,7 +12592,7 @@ __Pyx_PyType_GetName(PyTypeObject* tp)
     if (unlikely(name == NULL) || unlikely(!PyUnicode_Check(name))) {
         PyErr_Clear();
         Py_XDECREF(name);
-        name = __Pyx_NewRef(__pyx_n_s__15);
+        name = __Pyx_NewRef(__pyx_n_s__17);
     }
     return name;
 }
